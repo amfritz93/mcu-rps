@@ -69,16 +69,12 @@ function buildCharacterForSaga(name, sagaKey) {
     }
   }
 
-  const builtChar = {
+  return {
     name,
     color: char.color,
     beats,
     actions
   };
-
-  console.log(`[buildCharacterForSaga] Built ${name} for ${sagaKey}:`, builtChar);
-
-  return builtChar;
 }
 
 /**

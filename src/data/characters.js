@@ -555,10 +555,16 @@ export const characterRegistry = {
       "Thanos": "Genius and Magic"
     },
     deltasPerSaga: {
-      multiverse: ["Loki", "Mysterio"],
+      multiverse: ["Loki", "Mysterio", "Black Widow", "Captain America", "Thor", "Spider-Man", "Dr. Strange", "Black Panther"],
       multiverseActions: {
         "Loki": "Victor Von Doom",
-        "Mysterio": "Diplomatic Immunity"
+        "Mysterio": "Diplomatic Immunity",
+        "Black Widow": "Latverian Technology",
+        "Captain America": "Sorcery and Science",
+        "Thor": "Mystical Barriers",
+        "Spider-Man": "Doom's Genius",
+        "Dr. Strange": "Scientific Sorcery",
+        "Black Panther": "Doom Armor"
       }
     }
   },
