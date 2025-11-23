@@ -7,6 +7,7 @@ import HelpModal from './components/HelpModal';
 import OpponentSelector from './components/OpponentSelector';
 import AlignmentSelector from './components/AlignmentSelector';
 import SagaSelector from './components/SagaSelector';
+import CharacterSelector from './components/CharacterSelector';
 import './App.css';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
   const [opponentType, setOpponentType] = useState(null); // 'computer' or 'player'
   const [gameMode, setGameMode] = useState(null); // 'heroes', 'villains', or 'mixed'
   const [saga, setSaga] = useState(null); // 'avengers', 'infinity', or 'multiverse'
+  const [playerCharacter, setPlayerCharacter] = useState(null);
 
   // Session data
   const [currentSessionResults, setCurrentSessionResults] = useState([]);
@@ -46,6 +48,17 @@ function App() {
     setGameStage('character');
   };
 
+  const handleCharacterSelect = (characterName) => {
+    setPlayerCharacter(characterName);
+    // TODO: Proceed to game play
+    console.log('Game setup complete!', {
+      opponentType,
+      gameMode,
+      saga,
+      playerCharacter: characterName
+    });
+  };
+
   const renderGameStage = () => {
     switch (gameStage) {
       case 'opponent':
@@ -55,7 +68,7 @@ function App() {
       case 'saga':
         return <SagaSelector gameMode={gameMode} onSelect={handleSagaSelect} />;
       case 'character':
-        return <div className="text-center text-gray-600 dark:text-gray-400">Character selector coming soon...</div>;
+        return <CharacterSelector gameMode={gameMode} saga={saga} onSelect={handleCharacterSelect} />;
       default:
         return <div className="text-center text-gray-600 dark:text-gray-400">Select an opponent to begin</div>;
     }
