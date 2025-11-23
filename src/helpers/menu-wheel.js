@@ -136,7 +136,7 @@ export function getGameModeOptions() {
     },
     {
       key: 'mixed',
-      name: 'Heroes & Villains',
+      name: 'Mixed',
       description: 'Play with both heroes and villains'
     }
   ];

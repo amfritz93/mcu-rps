@@ -53,41 +53,34 @@ function SessionHistory({ currentSessionResults = [], pastSessions = [], opponen
 }
 
 function CurrentSessionTab({ results, opponentType }) {
-  if (results.length === 0) {
-    return (
-      <div className="text-center text-gray-500 dark:text-gray-400 py-8">
-        <p className="text-sm">No games played yet.</p>
-        <p className="text-xs mt-2">Start a game to see results here!</p>
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-6">
-      {/* Scoreboard */}
+      {/* Scoreboard - Always visible */}
       <Scoreboard results={results} opponentType={opponentType} />
 
       {/* Round Results */}
-      <div className="space-y-3">
-        <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-          Round History
-        </h3>
-        <div className="space-y-2 max-h-80 overflow-y-auto">
-          {results.map((result, index) => (
-            <div
-              key={index}
-              className="p-3 bg-gray-50 dark:bg-gray-700 rounded-md text-sm"
-            >
-              <p className="text-gray-900 dark:text-white font-medium">
-                Round {index + 1}
-              </p>
-              <p className="text-gray-600 dark:text-gray-400 mt-1">
-                {result.text}
-              </p>
-            </div>
-          ))}
+      {results.length > 0 && (
+        <div className="space-y-3">
+          <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+            Round History
+          </h3>
+          <div className="space-y-2 max-h-80 overflow-y-auto">
+            {results.map((result, index) => (
+              <div
+                key={index}
+                className="p-3 bg-gray-50 dark:bg-gray-700 rounded-md text-sm"
+              >
+                <p className="text-gray-900 dark:text-white font-medium">
+                  Round {index + 1}
+                </p>
+                <p className="text-gray-600 dark:text-gray-400 mt-1">
+                  {result.text}
+                </p>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
@@ -101,6 +94,12 @@ function PastSessionsTab({ sessions }) {
       </div>
     );
   }
+
+  // Helper to capitalize alignment names
+  const formatAlignment = (alignment) => {
+    if (alignment === 'mixed') return 'Mixed';
+    return alignment.charAt(0).toUpperCase() + alignment.slice(1);
+  };
 
   return (
     <div className="space-y-3">
@@ -118,7 +117,7 @@ function PastSessionsTab({ sessions }) {
                 {session.date}
               </p>
               <span className="text-xs font-medium px-2 py-1 rounded bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
-                {session.alignment}
+                {formatAlignment(session.alignment)}
               </span>
             </div>
             <div className="grid grid-cols-3 gap-2 text-xs text-gray-600 dark:text-gray-400">
@@ -141,7 +140,7 @@ function PastSessionsTab({ sessions }) {
                 <p>Win Rate</p>
               </div>
             </div>
-            {session.favoredCharacter && (
+            {session.favoredCharacter && typeof session.favoredCharacter === 'string' && (
               <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
                 Favored: {session.favoredCharacter}
               </p>

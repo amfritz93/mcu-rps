@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTheme } from './context/ThemeContext';
 import { getSessions, saveSession } from './utils/sessionStorage';
 import { calculateSessionStats } from './utils/gameLogic';
@@ -13,6 +13,15 @@ import './App.css';
 
 function App() {
   const { isDarkMode, toggleTheme } = useTheme();
+
+  // Apply dark mode to document root
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
   const [showHelpModal, setShowHelpModal] = useState(false);
 
   // Game setup state
@@ -109,25 +118,23 @@ function App() {
   };
 
   return (
-    <div className={isDarkMode ? 'dark' : ''}>
-      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
-        <Header
-          onHelpClick={handleHelpClick}
-          onThemeToggle={toggleTheme}
-          isDarkMode={isDarkMode}
-        />
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
+      <Header
+        onHelpClick={handleHelpClick}
+        onThemeToggle={toggleTheme}
+        isDarkMode={isDarkMode}
+      />
 
-        <GameBoard
-          currentStage={gameStage}
-          currentSessionResults={currentSessionResults}
-          pastSessions={pastSessions}
-          opponentType={opponentType}
-        >
-          {renderGameStage()}
-        </GameBoard>
+      <GameBoard
+        currentStage={gameStage}
+        currentSessionResults={currentSessionResults}
+        pastSessions={pastSessions}
+        opponentType={opponentType}
+      >
+        {renderGameStage()}
+      </GameBoard>
 
-        <HelpModal isOpen={showHelpModal} onClose={handleCloseHelp} />
-      </div>
+      <HelpModal isOpen={showHelpModal} onClose={handleCloseHelp} />
     </div>
   );
 }

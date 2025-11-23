@@ -13,22 +13,28 @@ function MenuWheel({ options, onSelect, size = 'large' }) {
   };
 
   const buttonSize = {
-    small: 'w-20 h-20',
-    medium: 'w-24 h-24',
-    large: 'w-28 h-28'
+    small: 'w-16 h-16 md:w-18 md:h-18',
+    medium: 'w-20 h-20 md:w-22 md:h-22',
+    large: 'w-24 h-24 md:w-28 md:h-28'
   };
 
-  // Calculate positions for buttons around the circle
+  const buttonTextSize = {
+    small: 'text-[0.6rem] md:text-xs',
+    medium: 'text-xs md:text-sm',
+    large: 'text-sm md:text-base'
+  };
+
+  // Calculate positions for buttons around the circle with increased radius for better spacing
   const getButtonPosition = (index, total) => {
     const angle = (index / total) * 2 * Math.PI - Math.PI / 2; // Start at top
-    const radius = size === 'large' ? 140 : size === 'medium' ? 120 : 100;
+    const radius = size === 'large' ? 160 : size === 'medium' ? 140 : 120;
     const x = Math.cos(angle) * radius;
     const y = Math.sin(angle) * radius;
     return { x, y };
   };
 
   return (
-    <div className="relative flex items-center justify-center" style={{ minHeight: '400px' }}>
+    <div className="relative flex items-center justify-center" style={{ minHeight: '450px', minWidth: '450px' }}>
       {/* Center circle (decorative) */}
       <div className={`absolute rounded-full border-4 border-gray-200 dark:border-gray-700 ${sizeClasses[size]}`} />
 
@@ -47,8 +53,9 @@ function MenuWheel({ options, onSelect, size = 'large' }) {
               backgroundColor: option.color || '#3B82F6',
             }}
             title={option.name}
+            aria-label={option.name}
           >
-            <span className="text-white font-bold text-center px-2 leading-tight">
+            <span className={`text-white font-bold text-center px-2 leading-tight ${buttonTextSize[size]}`}>
               {option.name}
             </span>
           </button>

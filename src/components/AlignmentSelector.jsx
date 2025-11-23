@@ -31,19 +31,19 @@ function AlignmentSelector({ onSelect }) {
         <div className="text-center p-4 bg-blue-50 dark:bg-blue-900 rounded-lg">
           <h4 className="font-semibold text-blue-900 dark:text-blue-100 mb-1">Heroes</h4>
           <p className="text-xs text-blue-800 dark:text-blue-200">
-            Play as the good guys of the MCU
+            Fight for justice with the heroes
           </p>
         </div>
         <div className="text-center p-4 bg-red-50 dark:bg-red-900 rounded-lg">
           <h4 className="font-semibold text-red-900 dark:text-red-100 mb-1">Villains</h4>
           <p className="text-xs text-red-800 dark:text-red-200">
-            Embrace the dark side
+            Embrace chaos with the villains
           </p>
         </div>
         <div className="text-center p-4 bg-purple-50 dark:bg-purple-900 rounded-lg">
-          <h4 className="font-semibold text-purple-900 dark:text-purple-100 mb-1">Heroes & Villains</h4>
+          <h4 className="font-semibold text-purple-900 dark:text-purple-100 mb-1">Mixed</h4>
           <p className="text-xs text-purple-800 dark:text-purple-200">
-            Mix it up with crossover battles
+            Battle across both sides
           </p>
         </div>
       </div>
