@@ -121,6 +121,7 @@ function App() {
           currentStage={gameStage}
           currentSessionResults={currentSessionResults}
           pastSessions={pastSessions}
+          opponentType={opponentType}
         >
           {renderGameStage()}
         </GameBoard>

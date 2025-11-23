@@ -3,11 +3,13 @@
  *
  * Displays current session game results and provides access to past sessions
  * Includes tabs to switch between current session and past sessions
+ * Shows real-time scoreboard during gameplay
  */
 
 import { useState } from 'react';
+import Scoreboard from './Scoreboard';
 
-function SessionHistory({ currentSessionResults = [], pastSessions = [] }) {
+function SessionHistory({ currentSessionResults = [], pastSessions = [], opponentType = null }) {
   const [activeTab, setActiveTab] = useState('current');
 
   return (
@@ -41,7 +43,7 @@ function SessionHistory({ currentSessionResults = [], pastSessions = [] }) {
       {/* Content */}
       <div className="p-6">
         {activeTab === 'current' ? (
-          <CurrentSessionTab results={currentSessionResults} />
+          <CurrentSessionTab results={currentSessionResults} opponentType={opponentType} />
         ) : (
           <PastSessionsTab sessions={pastSessions} />
         )}
@@ -50,7 +52,7 @@ function SessionHistory({ currentSessionResults = [], pastSessions = [] }) {
   );
 }
 
-function CurrentSessionTab({ results }) {
+function CurrentSessionTab({ results, opponentType }) {
   if (results.length === 0) {
     return (
       <div className="text-center text-gray-500 dark:text-gray-400 py-8">
@@ -61,24 +63,30 @@ function CurrentSessionTab({ results }) {
   }
 
   return (
-    <div className="space-y-3">
-      <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-        Round Results
-      </h3>
-      <div className="space-y-2 max-h-96 overflow-y-auto">
-        {results.map((result, index) => (
-          <div
-            key={index}
-            className="p-3 bg-gray-50 dark:bg-gray-700 rounded-md text-sm"
-          >
-            <p className="text-gray-900 dark:text-white font-medium">
-              Round {index + 1}
-            </p>
-            <p className="text-gray-600 dark:text-gray-400 mt-1">
-              {result.text}
-            </p>
-          </div>
-        ))}
+    <div className="space-y-6">
+      {/* Scoreboard */}
+      <Scoreboard results={results} opponentType={opponentType} />
+
+      {/* Round Results */}
+      <div className="space-y-3">
+        <h3 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+          Round History
+        </h3>
+        <div className="space-y-2 max-h-80 overflow-y-auto">
+          {results.map((result, index) => (
+            <div
+              key={index}
+              className="p-3 bg-gray-50 dark:bg-gray-700 rounded-md text-sm"
+            >
+              <p className="text-gray-900 dark:text-white font-medium">
+                Round {index + 1}
+              </p>
+              <p className="text-gray-600 dark:text-gray-400 mt-1">
+                {result.text}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
