@@ -6,6 +6,7 @@ import GameBoard from './components/GameBoard';
 import HelpModal from './components/HelpModal';
 import OpponentSelector from './components/OpponentSelector';
 import AlignmentSelector from './components/AlignmentSelector';
+import SagaSelector from './components/SagaSelector';
 import './App.css';
 
 function App() {
@@ -40,6 +41,11 @@ function App() {
     setGameStage('saga');
   };
 
+  const handleSagaSelect = (sagaKey) => {
+    setSaga(sagaKey);
+    setGameStage('character');
+  };
+
   const renderGameStage = () => {
     switch (gameStage) {
       case 'opponent':
@@ -47,7 +53,7 @@ function App() {
       case 'alignment':
         return <AlignmentSelector onSelect={handleAlignmentSelect} />;
       case 'saga':
-        return <div className="text-center text-gray-600 dark:text-gray-400">Saga selector coming soon...</div>;
+        return <SagaSelector gameMode={gameMode} onSelect={handleSagaSelect} />;
       case 'character':
         return <div className="text-center text-gray-600 dark:text-gray-400">Character selector coming soon...</div>;
       default:
