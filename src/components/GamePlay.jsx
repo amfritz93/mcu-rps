@@ -25,26 +25,39 @@ function GamePlay({
   const [roundResult, setRoundResult] = useState(null);
 
   const handlePlayerSelect = (characterName) => {
+    console.log('[GamePlay] Player selected:', characterName);
+    console.log('[GamePlay] Game mode:', gameMode, 'Saga:', saga);
+
     setPlayerSelection(characterName);
 
     if (opponentType === 'computer') {
       // Computer makes automatic selection
       const computerChar = getRandomCharacter(gameMode, saga);
+      console.log('[GamePlay] Computer random character:', computerChar);
+      console.log('[GamePlay] Computer character name:', computerChar.name);
+
       setOpponentSelection(computerChar.name);
 
       // Determine winner - playRound internally looks up both characters
       const result = playRound(characterName, computerChar.name, gameMode, saga);
+      console.log('[GamePlay] playRound result:', result);
 
       // Get the actual character objects used in the round
       const playerChar = getCharacterByName(characterName, gameMode, saga);
       const opponentChar = getCharacterByName(computerChar.name, gameMode, saga);
 
-      setRoundResult({
+      console.log('[GamePlay] Player char from lookup:', playerChar);
+      console.log('[GamePlay] Opponent char from lookup:', opponentChar);
+
+      const finalResult = {
         ...result,
         playerCharacter: playerChar,
         opponentCharacter: opponentChar,
         isPlayerWin: result.winner?.name === characterName
-      });
+      };
+
+      console.log('[GamePlay] Final result being set:', finalResult);
+      setRoundResult(finalResult);
       setRoundStage('result');
     } else {
       // Player vs Player - wait for second player
