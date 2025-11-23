@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useTheme } from './context/ThemeContext';
 import Header from './components/Header';
 import GameBoard from './components/GameBoard';
+import HelpModal from './components/HelpModal';
 import './App.css';
 
 function App() {
@@ -10,6 +11,10 @@ function App() {
 
   const handleHelpClick = () => {
     setShowHelpModal(true);
+  };
+
+  const handleCloseHelp = () => {
+    setShowHelpModal(false);
   };
 
   return (
@@ -24,6 +29,8 @@ function App() {
         <GameBoard>
           {/* Game stages will go here */}
         </GameBoard>
+
+        <HelpModal isOpen={showHelpModal} onClose={handleCloseHelp} />
       </div>
     </div>
   );
