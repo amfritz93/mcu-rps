@@ -194,7 +194,7 @@ function AlignmentsTab() {
         </div>
 
         <div className="bg-purple-50 dark:bg-purple-900 rounded-lg p-4">
-          <h4 className="font-semibold text-purple-900 dark:text-purple-100 mb-2">Heroes & Villains</h4>
+          <h4 className="font-semibold text-purple-900 dark:text-purple-100 mb-2">Mixed</h4>
           <p className="text-sm text-purple-800 dark:text-purple-200">
             Mix it up! Choose from both heroes and villains in epic crossover battles.
             The most diverse selection with unique matchups and strategies.

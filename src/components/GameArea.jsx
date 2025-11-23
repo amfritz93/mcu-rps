@@ -7,10 +7,10 @@
 
 function GameArea({ currentStage, children }) {
   const stages = [
-    { key: 'opponent', label: 'Choose Your Opponent' },
-    { key: 'alignment', label: 'Choose Your Alignment' },
-    { key: 'saga', label: 'Choose Your Saga' },
-    { key: 'character', label: 'Choose Your Character' },
+    { key: 'opponent', label: 'Choose Your Opponent', shortLabel: 'Your\nOpponent' },
+    { key: 'alignment', label: 'Choose Your Alignment', shortLabel: 'Your\nAlignment' },
+    { key: 'saga', label: 'Choose Your Saga', shortLabel: 'Your\nSaga' },
+    { key: 'character', label: 'Choose Your Character', shortLabel: 'Your\nCharacter' },
     { key: 'playing', label: 'Game In Progress' },
     { key: 'result', label: 'Round Result' }
   ];
@@ -22,12 +22,12 @@ function GameArea({ currentStage, children }) {
       {/* Stage Progress Indicator */}
       {currentStageIndex !== -1 && currentStage !== 'playing' && currentStage !== 'result' && (
         <div className="mb-6">
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center justify-center gap-4">
             {stages.slice(0, 4).map((stage, index) => (
-              <div key={stage.key} className="flex items-center flex-1">
-                <div className="flex flex-col items-center flex-1">
+              <div key={stage.key} className="flex items-center">
+                <div className="flex flex-col items-center">
                   <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium transition-colors duration-200 ${
+                    className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-colors duration-200 ${
                       index <= currentStageIndex
                         ? 'bg-blue-600 dark:bg-blue-500 text-white'
                         : 'bg-gray-200 dark:bg-gray-600 text-gray-500 dark:text-gray-400'
@@ -36,18 +36,18 @@ function GameArea({ currentStage, children }) {
                     {index + 1}
                   </div>
                   <p
-                    className={`text-xs mt-1 text-center hidden sm:block ${
+                    className={`text-xs mt-2 text-center whitespace-pre-line leading-tight ${
                       index <= currentStageIndex
                         ? 'text-gray-900 dark:text-white font-medium'
                         : 'text-gray-500 dark:text-gray-400'
                     }`}
                   >
-                    {stage.label.split(' ').slice(1).join(' ')}
+                    {stage.shortLabel}
                   </p>
                 </div>
                 {index < 3 && (
                   <div
-                    className={`h-0.5 flex-1 mx-2 transition-colors duration-200 ${
+                    className={`h-0.5 w-12 mx-2 transition-colors duration-200 ${
                       index < currentStageIndex
                         ? 'bg-blue-600 dark:bg-blue-500'
                         : 'bg-gray-200 dark:bg-gray-600'

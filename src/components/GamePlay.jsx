@@ -133,8 +133,9 @@ function GamePlay({
                 : 'text-red-600 dark:text-red-400'
           }`}>
             {roundResult.isTie ? "It's a Tie!" :
-             roundResult.isPlayerWin ? "You Win!" :
-             opponentType === 'computer' ? "Computer Wins!" : "Player 2 Wins!"}
+             roundResult.isPlayerWin
+               ? (opponentType === 'player' ? "Player 1 Wins!" : "You Win!")
+               : (opponentType === 'computer' ? "Computer Wins!" : "Player 2 Wins!")}
           </h2>
 
           {/* Character matchup */}
