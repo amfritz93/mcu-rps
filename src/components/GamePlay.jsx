@@ -32,14 +32,17 @@ function GamePlay({
       const computerChar = getRandomCharacter(gameMode, saga);
       setOpponentSelection(computerChar.name);
 
-      // Determine winner
+      // Determine winner - playRound internally looks up both characters
       const result = playRound(characterName, computerChar.name, gameMode, saga);
+
+      // Get the actual character objects used in the round
       const playerChar = getCharacterByName(characterName, gameMode, saga);
+      const opponentChar = getCharacterByName(computerChar.name, gameMode, saga);
 
       setRoundResult({
         ...result,
         playerCharacter: playerChar,
-        opponentCharacter: computerChar,
+        opponentCharacter: opponentChar,
         isPlayerWin: result.winner?.name === characterName
       });
       setRoundStage('result');
