@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import Header from './components/Header';
+import GameBoard from './components/GameBoard';
 import './App.css';
 
 function App() {
@@ -29,6 +30,9 @@ function App() {
             <p>Game content coming soon...</p>
           </div>
         </main>
+        <GameBoard>
+          {/* Game stages will go here */}
+        </GameBoard>
       </div>
     </div>
   );
