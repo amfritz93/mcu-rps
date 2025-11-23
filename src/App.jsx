@@ -24,6 +24,12 @@ function App() {
           isDarkMode={isDarkMode}
         />
 
+        {/* Main content will go here */}
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="text-center text-gray-700 dark:text-gray-300">
+            <p>Game content coming soon...</p>
+          </div>
+        </main>
         <GameBoard>
           {/* Game stages will go here */}
         </GameBoard>
