@@ -20,6 +20,15 @@ function GameBoard({ children, currentSessionResults, pastSessions }) {
             currentSessionResults={currentSessionResults}
             pastSessions={pastSessions}
           />
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+            <h2 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+              Session History
+            </h2>
+            <div className="text-gray-600 dark:text-gray-400">
+              {/* Session history content will go here */}
+              <p className="text-sm">Current session results will appear here...</p>
+            </div>
+          </div>
         </aside>
 
         {/* Right Column - Game Area (2/3 width on desktop) */}
