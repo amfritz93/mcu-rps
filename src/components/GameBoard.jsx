@@ -15,7 +15,8 @@ function GameBoard({
   children,
   currentSessionResults,
   pastSessions,
-  currentStage = 'opponent'
+  currentStage = 'opponent',
+  opponentType = null
 }) {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -25,6 +26,7 @@ function GameBoard({
           <SessionHistory
             currentSessionResults={currentSessionResults}
             pastSessions={pastSessions}
+            opponentType={opponentType}
           />
         </aside>
 
