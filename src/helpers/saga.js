@@ -45,17 +45,25 @@ function buildCharacterForSaga(name, sagaKey) {
     return null;
   }
 
-  // Start with base beats and actions
+  // Start with base beats
   let beats = [...char.baseBeats];
-  let actions = { ...char.baseActions };
+  const actions = {};
+
+  // Assign base action to all base beats
+  char.baseBeats.forEach(opponent => {
+    actions[opponent] = char.baseAction;
+  });
 
   // Add infinity saga beats/actions if applicable
   if (sagaKey === 'infinity' || sagaKey === 'multiverse') {
     if (char.deltasPerSaga.infinity) {
       beats = [...beats, ...char.deltasPerSaga.infinity];
-    }
-    if (char.deltasPerSaga.infinityActions) {
-      actions = { ...actions, ...char.deltasPerSaga.infinityActions };
+
+      // Use infinityAction if available, otherwise use baseAction
+      const actionToUse = char.deltasPerSaga.infinityAction || char.baseAction;
+      char.deltasPerSaga.infinity.forEach(opponent => {
+        actions[opponent] = actionToUse;
+      });
     }
   }
 
@@ -63,9 +71,14 @@ function buildCharacterForSaga(name, sagaKey) {
   if (sagaKey === 'multiverse') {
     if (char.deltasPerSaga.multiverse) {
       beats = [...beats, ...char.deltasPerSaga.multiverse];
-    }
-    if (char.deltasPerSaga.multiverseActions) {
-      actions = { ...actions, ...char.deltasPerSaga.multiverseActions };
+
+      // Use multiverseAction if available, otherwise fallback to infinityAction or baseAction
+      const actionToUse = char.deltasPerSaga.multiverseAction ||
+                          char.deltasPerSaga.infinityAction ||
+                          char.baseAction;
+      char.deltasPerSaga.multiverse.forEach(opponent => {
+        actions[opponent] = actionToUse;
+      });
     }
   }
 
