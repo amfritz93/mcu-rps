@@ -3,9 +3,13 @@
  *
  * Central registry for all MCU characters with:
  * - MCU-accurate colors (based on iconic suit/appearance)
- * - Base beats relationships (Avengers Saga)
- * - Incremental beats additions per saga (Infinity, Multiverse)
+ * - Mathematically balanced matchups (each character wins exactly 15 times)
+ * - Base beats relationships (Avengers Saga - 5 wins)
+ * - Incremental beats additions per saga (Infinity +5, Multiverse +5)
  * - Action taglines describing how each character defeats opponents
+ *
+ * Generated using circular tournament algorithm to ensure perfect balance
+ * and no bidirectional conflicts.
  */
 
 export const characterRegistry = {
@@ -14,311 +18,451 @@ export const characterRegistry = {
   // ========================================
 
   "Captain America": {
-    color: "#0A3161", // Deep blue from his suit
-    baseBeats: ["Hulk", "Iron Man"],
+    color: "#0A3161",
+    baseBeats: ["Black Panther","Spider-Man","Loki","Mr. Fantastic","Black Widow"],
     baseActions: {
-      "Hulk": "Tactical Strategy",
-      "Iron Man": "Vibranium Shield"
+          "Black Panther": "Vibranium Shield",
+          "Spider-Man": "Tactical Strategy",
+          "Loki": "Super Soldier Serum",
+          "Mr. Fantastic": "Worthy of Mjolnir",
+          "Black Widow": "Shield Ricochet"
     },
     deltasPerSaga: {
-      infinity: ["Thor", "Black Widow"],
+      infinity: ["Hawk-Eye","Star-Lord","Ant-Man","Red Skull","Ronan the Accuser"],
       infinityActions: {
-        "Thor": "Worthy of Mjolnir",
-        "Black Widow": "Super Soldier Serum"
+              "Hawk-Eye": "Unbreakable Will",
+              "Star-Lord": "Experience and Leadership",
+              "Ant-Man": "Hand-to-Hand Combat",
+              "Red Skull": "Tactical Superiority",
+              "Ronan the Accuser": "Cap's Shield"
       },
-      multiverse: ["Spider-Man", "Scarlet Witch", "Hawk-Eye", "Star-Lord", "Mr. Fantastic"],
+      multiverse: ["Killmonger","Mysterio","Doctor Octopus","Green Goblin","Kingpin"],
       multiverseActions: {
-        "Spider-Man": "Experience and Leadership",
-        "Scarlet Witch": "Unbreakable Will",
-        "Hawk-Eye": "Shield Ricochet",
-        "Star-Lord": "Hand-to-Hand Combat",
-        "Mr. Fantastic": "Tactical Superiority"
+              "Killmonger": "I Can Do This All Day",
+              "Mysterio": "Star-Spangled Plan",
+              "Doctor Octopus": "Patriotic Power",
+              "Green Goblin": "Avenger's Leader",
+              "Kingpin": "Never Give Up"
       }
     }
   },
 
   "Iron Man": {
-    color: "#C8102E", // Iron Man red
-    baseBeats: ["Black Widow", "Hulk"],
+    color: "#C8102E",
+    baseBeats: ["Magneto","Venom","Ultron","Captain America","Black Panther"],
     baseActions: {
-      "Black Widow": "Repulsor Technology",
-      "Hulk": "Hulkbuster Armor"
+          "Magneto": "Repulsor Technology",
+          "Venom": "Hulkbuster Armor",
+          "Ultron": "Arc Reactor Beam",
+          "Captain America": "Stark Tech Superiority",
+          "Black Panther": "Sonic Cannons"
     },
     deltasPerSaga: {
-      infinity: ["Thor", "Spider-Man"],
+      infinity: ["Spider-Man","Loki","Mr. Fantastic","Black Widow","Hawk-Eye"],
       infinityActions: {
-        "Thor": "Arc Reactor Beam",
-        "Spider-Man": "Stark Tech Superiority"
+              "Spider-Man": "Electromagnetic Pulse",
+              "Loki": "Micro-Missile Barrage",
+              "Mr. Fantastic": "Nanotech Arsenal",
+              "Black Widow": "Unibeam Blast",
+              "Hawk-Eye": "Stark Innovation"
       },
-      multiverse: ["Black Panther", "The Vision", "Ant-Man", "Captain Marvel"],
+      multiverse: ["Star-Lord","Ant-Man","Red Skull","Ronan the Accuser","Killmonger"],
       multiverseActions: {
-        "Black Panther": "Sonic Cannons",
-        "The Vision": "Electromagnetic Pulse",
-        "Ant-Man": "Micro-Missile Barrage",
-        "Captain Marvel": "Nanotech Arsenal"
+              "Star-Lord": "Armor Superiority",
+              "Ant-Man": "J.A.R.V.I.S.",
+              "Red Skull": "Mark 50 Suit",
+              "Ronan the Accuser": "Repulsor Rays",
+              "Killmonger": "Tony's Genius"
       }
     }
   },
 
   "Thor": {
-    color: "#B0B0B0", // Silver from armor/helmet
-    baseBeats: ["Iron Man", "Captain America"],
+    color: "#B0B0B0",
+    baseBeats: ["Hela","Captain Marvel","The Vision","Dr. Strange","Hulk"],
     baseActions: {
-      "Iron Man": "Lightning Strike",
-      "Captain America": "Mjolnir Throw"
+          "Hela": "Lightning Strike",
+          "Captain Marvel": "Mjolnir Throw",
+          "The Vision": "Stormbreaker Axe",
+          "Dr. Strange": "God of Thunder",
+          "Hulk": "Bifrost Summon"
     },
     deltasPerSaga: {
-      infinity: ["Hulk", "Black Widow", "Spider-Man", "Dr. Strange"],
+      infinity: ["Iron Man","Magneto","Venom","Ultron","Captain America"],
       infinityActions: {
-        "Hulk": "God of Thunder",
-        "Black Widow": "Asgardian Strength",
-        "Spider-Man": "Bifrost Summon",
-        "Dr. Strange": "Stormbreaker Axe"
+              "Iron Man": "Asgardian Strength",
+              "Magneto": "Thunderous Force",
+              "Venom": "Lightning Bolt",
+              "Ultron": "King of Asgard",
+              "Captain America": "Odinforce Power"
       },
-      multiverse: ["Scarlet Witch", "Hawk-Eye", "Star-Lord", "Mr. Fantastic"],
+      multiverse: ["Black Panther","Spider-Man","Loki","Mr. Fantastic","Black Widow"],
       multiverseActions: {
-        "Scarlet Witch": "Thunderous Force",
-        "Hawk-Eye": "Lightning Bolt",
-        "Star-Lord": "King of Asgard",
-        "Mr. Fantastic": "Odinforce Power"
+              "Black Panther": "Hammer Strike",
+              "Spider-Man": "Thunder God",
+              "Loki": "Storm Summoning",
+              "Mr. Fantastic": "Godly Power",
+              "Black Widow": "Rainbow Bridge"
       }
     }
   },
 
   "Hulk": {
-    color: "#6DAA2C", // Hulk green
-    baseBeats: ["Thor", "Black Widow"],
+    color: "#6DAA2C",
+    baseBeats: ["Iron Man","Magneto","Venom","Ultron","Captain America"],
     baseActions: {
-      "Thor": "Thunderclap",
-      "Black Widow": "Brute Strength"
+          "Iron Man": "Thunderclap",
+          "Magneto": "Brute Strength",
+          "Venom": "Gamma Rage",
+          "Ultron": "Crushing Power",
+          "Captain America": "Unstoppable Force"
     },
     deltasPerSaga: {
-      infinity: ["Black Widow", "Spider-Man", "Dr. Strange", "Black Panther"],
+      infinity: ["Black Panther","Spider-Man","Loki","Mr. Fantastic","Black Widow"],
       infinityActions: {
-        "Black Widow": "Gamma Rage",
-        "Spider-Man": "Crushing Power",
-        "Dr. Strange": "Unstoppable Force",
-        "Black Panther": "Smash Attack"
+              "Black Panther": "Smash Attack",
+              "Spider-Man": "Gamma Radiation",
+              "Loki": "World Breaker",
+              "Mr. Fantastic": "Savage Hulk",
+              "Black Widow": "Raw Power"
       },
-      multiverse: ["The Vision", "Ant-Man", "Captain Marvel"],
+      multiverse: ["Hawk-Eye","Star-Lord","Ant-Man","Red Skull","Ronan the Accuser"],
       multiverseActions: {
-        "The Vision": "Gamma Radiation",
-        "Ant-Man": "World Breaker",
-        "Captain Marvel": "Savage Hulk"
+              "Hawk-Eye": "Green Fury",
+              "Star-Lord": "Incredible Strength",
+              "Ant-Man": "Hulk Smash",
+              "Red Skull": "Rage Mode",
+              "Ronan the Accuser": "Banner's Anger"
       }
     }
   },
 
   "Black Widow": {
-    color: "#1A1A1A", // Black from suit
-    baseBeats: ["Captain America", "Thor"],
+    color: "#1A1A1A",
+    baseBeats: ["The Watcher","Galactus","Scarlet Witch","Doctor Doom","Thanos"],
     baseActions: {
-      "Captain America": "Black Widow's Bite",
-      "Thor": "Stealth and Agility"
+          "The Watcher": "Black Widow's Bite",
+          "Galactus": "Stealth and Agility",
+          "Scarlet Witch": "Espionage Training",
+          "Doctor Doom": "Tactical Precision",
+          "Thanos": "Red Room Technique"
     },
     deltasPerSaga: {
-      infinity: ["Spider-Man", "Dr. Strange", "Black Panther", "Scarlet Witch"],
+      infinity: ["Hawk-Eye","Star-Lord","Ant-Man","Red Skull","Ronan the Accuser"],
       infinityActions: {
-        "Spider-Man": "Espionage Training",
-        "Dr. Strange": "Tactical Precision",
-        "Black Panther": "Red Room Technique",
-        "Scarlet Witch": "Assassin's Strike"
+              "Hawk-Eye": "Assassin's Strike",
+              "Star-Lord": "Superior Tactics",
+              "Ant-Man": "Widow's Sting",
+              "Red Skull": "Covert Operations",
+              "Ronan the Accuser": "Spy Mastery"
       },
-      multiverse: ["Hawk-Eye", "Star-Lord", "Mr. Fantastic"],
+      multiverse: ["Killmonger","Mysterio","Doctor Octopus","Green Goblin","Kingpin"],
       multiverseActions: {
-        "Hawk-Eye": "Superior Tactics",
-        "Star-Lord": "Widow's Sting",
-        "Mr. Fantastic": "Covert Operations"
+              "Killmonger": "Natasha's Skill",
+              "Mysterio": "Assassin Training",
+              "Doctor Octopus": "Stealth Attack",
+              "Green Goblin": "Widow Shock",
+              "Kingpin": "Red Room"
       }
     }
   },
 
   "Spider-Man": {
-    color: "#DF1F2D", // Spider-Man red
-    baseBeats: ["Dr. Strange", "Black Panther", "Scarlet Witch", "Captain America"],
+    color: "#DF1F2D",
+    baseBeats: ["The Watcher","Galactus","Loki","Mr. Fantastic","Black Widow"],
     baseActions: {
-      "Dr. Strange": "Spider-Sense",
-      "Black Panther": "Web Strike",
-      "Scarlet Witch": "Agile Reflexes",
-      "Captain America": "Youth and Speed"
+          "The Watcher": "Spider-Sense",
+          "Galactus": "Web Strike",
+          "Loki": "Agile Reflexes",
+          "Mr. Fantastic": "Youth and Speed",
+          "Black Widow": "Web Cocoon"
     },
     deltasPerSaga: {
-      multiverse: ["The Vision", "Ant-Man", "Captain Marvel"],
+      infinity: ["Hawk-Eye","Star-Lord","Ant-Man","Red Skull","Ronan the Accuser"],
+      infinityActions: {
+              "Hawk-Eye": "Wall-Crawler Advantage",
+              "Star-Lord": "Iron Spider Suit",
+              "Ant-Man": "Spidey Sense",
+              "Red Skull": "Web-Slinging",
+              "Ronan the Accuser": "Friendly Neighborhood"
+      },
+      multiverse: ["Killmonger","Mysterio","Doctor Octopus","Green Goblin","Kingpin"],
       multiverseActions: {
-        "The Vision": "Web Cocoon",
-        "Ant-Man": "Wall-Crawler Advantage",
-        "Captain Marvel": "Iron Spider Suit"
+              "Killmonger": "Quick Reflexes",
+              "Mysterio": "Sticky Situation",
+              "Doctor Octopus": "Peter's Wit",
+              "Green Goblin": "Web Shooter",
+              "Kingpin": "Spider Agility"
       }
     }
   },
 
   "Dr. Strange": {
-    color: "#1B4B8C", // Blue from robes
-    baseBeats: ["Black Panther", "Scarlet Witch", "Captain America", "Iron Man"],
+    color: "#1B4B8C",
+    baseBeats: ["Hulk","Iron Man","Magneto","Venom","Ultron"],
     baseActions: {
-      "Black Panther": "Mystic Arts",
-      "Scarlet Witch": "Time Stone",
-      "Captain America": "Mirror Dimension",
-      "Iron Man": "Sorcery Supreme"
+          "Hulk": "Mystic Arts",
+          "Iron Man": "Time Stone",
+          "Magneto": "Mirror Dimension",
+          "Venom": "Sorcery Supreme",
+          "Ultron": "Astral Projection"
     },
     deltasPerSaga: {
-      multiverse: ["Hawk-Eye", "Star-Lord", "Mr. Fantastic"],
+      infinity: ["Captain America","Black Panther","Spider-Man","Loki","Mr. Fantastic"],
+      infinityActions: {
+              "Captain America": "Portals and Spells",
+              "Black Panther": "Reality Manipulation",
+              "Spider-Man": "Magical Mastery",
+              "Loki": "Crimson Bands",
+              "Mr. Fantastic": "Dimensional Magic"
+      },
+      multiverse: ["Black Widow","Hawk-Eye","Star-Lord","Ant-Man","Red Skull"],
       multiverseActions: {
-        "Hawk-Eye": "Astral Projection",
-        "Star-Lord": "Portals and Spells",
-        "Mr. Fantastic": "Reality Manipulation"
+              "Black Widow": "Spell Casting",
+              "Hawk-Eye": "Vishanti Power",
+              "Star-Lord": "Time Loop",
+              "Ant-Man": "Eldritch Magic",
+              "Red Skull": "Sorcerer Supreme"
       }
     }
   },
 
   "Black Panther": {
-    color: "#2C2C54", // Dark purple/blue from suit
-    baseBeats: ["Scarlet Witch", "Captain America", "Iron Man", "Thor"],
+    color: "#2C2C54",
+    baseBeats: ["The Watcher","Spider-Man","Loki","Mr. Fantastic","Black Widow"],
     baseActions: {
-      "Scarlet Witch": "Vibranium Claws",
-      "Captain America": "Wakandan Technology",
-      "Iron Man": "Kinetic Energy Blast",
-      "Thor": "Panther Habit"
+          "The Watcher": "Vibranium Claws",
+          "Spider-Man": "Wakandan Technology",
+          "Loki": "Kinetic Energy Blast",
+          "Mr. Fantastic": "Panther Habit",
+          "Black Widow": "Vibranium Suit"
     },
     deltasPerSaga: {
-      multiverse: ["The Vision", "Ant-Man", "Captain Marvel"],
+      infinity: ["Hawk-Eye","Star-Lord","Ant-Man","Red Skull","Ronan the Accuser"],
+      infinityActions: {
+              "Hawk-Eye": "Royal Combat Training",
+              "Star-Lord": "Heart-Shaped Herb",
+              "Ant-Man": "King's Power",
+              "Red Skull": "Wakanda Forever",
+              "Ronan the Accuser": "Panther Strike"
+      },
+      multiverse: ["Killmonger","Mysterio","Doctor Octopus","Green Goblin","Kingpin"],
       multiverseActions: {
-        "The Vision": "Vibranium Suit",
-        "Ant-Man": "Royal Combat Training",
-        "Captain Marvel": "Heart-Shaped Herb"
+              "Killmonger": "Royal Warrior",
+              "Mysterio": "Advanced Tech",
+              "Doctor Octopus": "T'Challa's Skill",
+              "Green Goblin": "Ancestral Power",
+              "Kingpin": "Black Panther Fury"
       }
     }
   },
 
   "Scarlet Witch": {
-    color: "#DC143C", // Crimson red
-    baseBeats: ["Captain America", "Iron Man", "Thor", "Hulk"],
+    color: "#DC143C",
+    baseBeats: ["Doctor Doom","Thanos","Thor","Hela","Captain Marvel"],
     baseActions: {
-      "Captain America": "Chaos Magic",
-      "Iron Man": "Hex Bolts",
-      "Thor": "Reality Warping",
-      "Hulk": "Mind Manipulation"
+          "Doctor Doom": "Chaos Magic",
+          "Thanos": "Reality Warping",
+          "Thor": "Hex Bolts",
+          "Hela": "Darkhold Power",
+          "Captain Marvel": "Probability Manipulation"
     },
     deltasPerSaga: {
-      multiverse: ["The Vision", "Star-Lord", "Mr. Fantastic"],
+      infinity: ["The Vision","Dr. Strange","Hulk","Iron Man","Magneto"],
+      infinityActions: {
+              "The Vision": "Mind Manipulation",
+              "Dr. Strange": "Scarlet Fury",
+              "Hulk": "Chaos Energy",
+              "Iron Man": "Magical Mastery",
+              "Magneto": "Nexus Being"
+      },
+      multiverse: ["Venom","Ultron","Captain America","Black Panther","Spider-Man"],
       multiverseActions: {
-        "The Vision": "Darkhold Power",
-        "Star-Lord": "Scarlet Witch Fury",
-        "Mr. Fantastic": "Probability Manipulation"
+              "Venom": "Reality Alteration",
+              "Ultron": "Psionic Blast",
+              "Captain America": "Magical Shield",
+              "Black Panther": "Chaos Control",
+              "Spider-Man": "Hex Wave"
       }
     }
   },
 
   "Hawk-Eye": {
-    color: "#4B0082", // Deep purple from suit
-    baseBeats: ["Iron Man", "Hulk", "Spider-Man", "Black Panther", "Scarlet Witch"],
+    color: "#4B0082",
+    baseBeats: ["The Watcher","Galactus","Scarlet Witch","Doctor Doom","Thanos"],
     baseActions: {
-      "Iron Man": "Explosive Arrow",
-      "Hulk": "Precision Shot",
-      "Spider-Man": "Trick Arrow",
-      "Black Panther": "Perfect Aim",
-      "Scarlet Witch": "EMP Arrow"
+          "The Watcher": "Explosive Arrow",
+          "Galactus": "Precision Shot",
+          "Scarlet Witch": "Trick Arrow",
+          "Doctor Doom": "Perfect Aim",
+          "Thanos": "EMP Arrow"
     },
     deltasPerSaga: {
-      multiverse: ["Ant-Man", "Captain Marvel"],
+      infinity: ["Thor","Star-Lord","Ant-Man","Red Skull","Ronan the Accuser"],
+      infinityActions: {
+              "Thor": "Pym Particle Arrow",
+              "Star-Lord": "Quantum Arrow",
+              "Ant-Man": "Never Miss",
+              "Red Skull": "Hawkeye's Aim",
+              "Ronan the Accuser": "Ronin Strike"
+      },
+      multiverse: ["Killmonger","Mysterio","Doctor Octopus","Green Goblin","Kingpin"],
       multiverseActions: {
-        "Ant-Man": "Pym Particle Arrow",
-        "Captain Marvel": "Quantum Arrow"
+              "Killmonger": "Tactical Arrow",
+              "Mysterio": "Clint's Precision",
+              "Doctor Octopus": "Arrow Barrage",
+              "Green Goblin": "Sharpshooter",
+              "Kingpin": "Bull's-Eye"
       }
     }
   },
 
   "The Vision": {
-    color: "#E83F6F", // Pink/red from synthezoid body
-    baseBeats: ["Captain America", "Thor", "Black Widow", "Dr. Strange", "Hawk-Eye"],
+    color: "#E83F6F",
+    baseBeats: ["Dr. Strange","Hulk","Iron Man","Magneto","Venom"],
     baseActions: {
-      "Captain America": "Mind Stone Beam",
-      "Thor": "Density Manipulation",
-      "Black Widow": "Synthetic Superiority",
-      "Dr. Strange": "Phasing Attack",
-      "Hawk-Eye": "Infinite Processing"
+          "Dr. Strange": "Mind Stone Beam",
+          "Hulk": "Density Manipulation",
+          "Iron Man": "Phasing Attack",
+          "Magneto": "Infinite Processing",
+          "Venom": "Vibranium Body"
     },
     deltasPerSaga: {
-      multiverse: ["Star-Lord", "Mr. Fantastic"],
+      infinity: ["Ultron","Captain America","Black Panther","Spider-Man","Loki"],
+      infinityActions: {
+              "Ultron": "Advanced AI",
+              "Captain America": "Synthetic Superiority",
+              "Black Panther": "Phase Through",
+              "Spider-Man": "Vision Beam",
+              "Loki": "Android Power"
+      },
+      multiverse: ["Mr. Fantastic","Black Widow","Hawk-Eye","Star-Lord","Ant-Man"],
       multiverseActions: {
-        "Star-Lord": "Vibranium Body",
-        "Mr. Fantastic": "Advanced AI"
+              "Mr. Fantastic": "Molecular Control",
+              "Black Widow": "Computational Speed",
+              "Hawk-Eye": "Synthezoid Strength",
+              "Star-Lord": "Neural Network",
+              "Ant-Man": "Perfect Logic"
       }
     }
   },
 
   "Star-Lord": {
-    color: "#8B4513", // Brown from jacket
-    baseBeats: ["Iron Man", "Hulk", "Spider-Man", "Black Panther", "The Vision"],
+    color: "#8B4513",
+    baseBeats: ["The Watcher","Galactus","Scarlet Witch","Doctor Doom","Thanos"],
     baseActions: {
-      "Iron Man": "Element Guns",
-      "Hulk": "Jet Boot Maneuver",
-      "Spider-Man": "Quad Blasters",
-      "Black Panther": "Legendary Outlaw",
-      "The Vision": "Celestial Power"
+          "The Watcher": "Element Guns",
+          "Galactus": "Jet Boot Maneuver",
+          "Scarlet Witch": "Quad Blasters",
+          "Doctor Doom": "Legendary Outlaw",
+          "Thanos": "Celestial Power"
     },
     deltasPerSaga: {
-      multiverse: ["Ant-Man", "Captain Marvel"],
+      infinity: ["Thor","Hela","Ant-Man","Red Skull","Ronan the Accuser"],
+      infinityActions: {
+              "Thor": "Awesome Mix Vol. 3",
+              "Hela": "Hadron Enforcer",
+              "Ant-Man": "Star-Lord Dance",
+              "Red Skull": "Guardians Leader",
+              "Ronan the Accuser": "Blaster Fire"
+      },
+      multiverse: ["Killmonger","Mysterio","Doctor Octopus","Green Goblin","Kingpin"],
       multiverseActions: {
-        "Ant-Man": "Awesome Mix Vol. 3",
-        "Captain Marvel": "Hadron Enforcer"
+              "Killmonger": "Peter Quill",
+              "Mysterio": "Ravager Tactics",
+              "Doctor Octopus": "Outlaw Hero",
+              "Green Goblin": "Space Pirate",
+              "Kingpin": "Celestial Gene"
       }
     }
   },
 
   "Ant-Man": {
-    color: "#B8001F", // Dark red from suit
-    baseBeats: ["Captain America", "Thor", "Black Widow", "Dr. Strange", "Scarlet Witch"],
+    color: "#B8001F",
+    baseBeats: ["The Watcher","Galactus","Scarlet Witch","Doctor Doom","Thanos"],
     baseActions: {
-      "Captain America": "Shrinking Surprise",
-      "Thor": "Subatomic Strike",
-      "Black Widow": "Giant-Man Stomp",
-      "Dr. Strange": "Quantum Realm",
-      "Scarlet Witch": "Pym Particle Punch"
+          "The Watcher": "Shrinking Surprise",
+          "Galactus": "Subatomic Strike",
+          "Scarlet Witch": "Giant-Man Stomp",
+          "Doctor Doom": "Quantum Realm",
+          "Thanos": "Pym Particle Punch"
     },
     deltasPerSaga: {
-      multiverse: ["Hawk-Eye", "Mr. Fantastic"],
+      infinity: ["Thor","Hela","Captain Marvel","Red Skull","Ronan the Accuser"],
+      infinityActions: {
+              "Thor": "Microscopic Evasion",
+              "Hela": "Size Manipulation",
+              "Captain Marvel": "Grow and Shrink",
+              "Red Skull": "Scott's Surprise",
+              "Ronan the Accuser": "Tiny Hero"
+      },
+      multiverse: ["Killmonger","Mysterio","Doctor Octopus","Green Goblin","Kingpin"],
       multiverseActions: {
-        "Hawk-Eye": "Microscopic Evasion",
-        "Mr. Fantastic": "Size Manipulation"
+              "Killmonger": "Quantum Power",
+              "Mysterio": "Ant Army",
+              "Doctor Octopus": "Size Change",
+              "Green Goblin": "Pym Tech",
+              "Kingpin": "Microverse"
       }
     }
   },
 
   "Captain Marvel": {
-    color: "#FDB827", // Gold from suit
-    baseBeats: ["Captain America", "Thor", "Black Widow", "Dr. Strange", "Scarlet Witch"],
+    color: "#FDB827",
+    baseBeats: ["The Vision","Dr. Strange","Hulk","Iron Man","Magneto"],
     baseActions: {
-      "Captain America": "Photon Blast",
-      "Thor": "Binary Form",
-      "Black Widow": "Cosmic Energy",
-      "Dr. Strange": "Energy Absorption",
-      "Scarlet Witch": "Space Stone Power"
+          "The Vision": "Photon Blast",
+          "Dr. Strange": "Binary Form",
+          "Hulk": "Cosmic Energy",
+          "Iron Man": "Energy Absorption",
+          "Magneto": "Space Stone Power"
     },
     deltasPerSaga: {
-      multiverse: ["Hawk-Eye", "Star-Lord"],
+      infinity: ["Venom","Ultron","Captain America","Black Panther","Spider-Man"],
+      infinityActions: {
+              "Venom": "Supersonic Flight",
+              "Ultron": "Kree Warrior",
+              "Captain America": "Captain's Power",
+              "Black Panther": "Photon Energy",
+              "Spider-Man": "Star Power"
+      },
+      multiverse: ["Loki","Mr. Fantastic","Black Widow","Hawk-Eye","Star-Lord"],
       multiverseActions: {
-        "Hawk-Eye": "Supersonic Flight",
-        "Star-Lord": "Kree Warrior"
+              "Loki": "Energy Projection",
+              "Mr. Fantastic": "Binary Mode",
+              "Black Widow": "Cosmic Flight",
+              "Hawk-Eye": "Energy Shield",
+              "Star-Lord": "Carol's Fury"
       }
     }
   },
 
   "Mr. Fantastic": {
-    color: "#4682B4", // Steel blue from suit
-    baseBeats: ["Iron Man", "Hulk", "Spider-Man", "Black Panther", "The Vision"],
+    color: "#4682B4",
+    baseBeats: ["The Watcher","Galactus","Scarlet Witch","Doctor Doom","Black Widow"],
     baseActions: {
-      "Iron Man": "Elastic Absorption",
-      "Hulk": "Genius Intellect",
-      "Spider-Man": "Stretch Attack",
-      "Black Panther": "Scientific Superiority",
-      "The Vision": "Molecular Manipulation"
+          "The Watcher": "Elastic Absorption",
+          "Galactus": "Genius Intellect",
+          "Scarlet Witch": "Stretch Attack",
+          "Doctor Doom": "Scientific Superiority",
+          "Black Widow": "Molecular Manipulation"
     },
     deltasPerSaga: {
-      multiverse: ["Ant-Man", "Star-Lord"],
+      infinity: ["Hawk-Eye","Star-Lord","Ant-Man","Red Skull","Ronan the Accuser"],
+      infinityActions: {
+              "Hawk-Eye": "Unstable Molecules",
+              "Star-Lord": "Reed Richards Strategy",
+              "Ant-Man": "Elasticity",
+              "Red Skull": "Brilliant Mind",
+              "Ronan the Accuser": "Fantastic Four"
+      },
+      multiverse: ["Killmonger","Mysterio","Doctor Octopus","Green Goblin","Kingpin"],
       multiverseActions: {
-        "Ant-Man": "Unstable Molecules",
-        "Star-Lord": "Reed Richards Strategy"
+              "Killmonger": "Stretch Power",
+              "Mysterio": "Scientific Method",
+              "Doctor Octopus": "Reed's Brain",
+              "Green Goblin": "Rubber Body",
+              "Kingpin": "Genius Plan"
       }
     }
   },
@@ -328,341 +472,483 @@ export const characterRegistry = {
   // ========================================
 
   "Loki": {
-    color: "#2D5016", // Dark green from armor
-    baseBeats: ["Red Skull", "Ronan the Accuser"],
+    color: "#2D5016",
+    baseBeats: ["The Watcher","Galactus","Scarlet Witch","Mr. Fantastic","Black Widow"],
     baseActions: {
-      "Red Skull": "Illusion Magic",
-      "Ronan the Accuser": "Trickster's Deception"
+          "The Watcher": "Illusion Magic",
+          "Galactus": "Trickster's Deception",
+          "Scarlet Witch": "Scepter Strike",
+          "Mr. Fantastic": "God of Mischief",
+          "Black Widow": "Asgardian Sorcery"
     },
     deltasPerSaga: {
-      infinity: ["Hela", "Mysterio", "Venom", "Thanos"],
+      infinity: ["Hawk-Eye","Star-Lord","Ant-Man","Red Skull","Ronan the Accuser"],
       infinityActions: {
-        "Hela": "Scepter Strike",
-        "Mysterio": "God of Mischief",
-        "Venom": "Asgardian Sorcery",
-        "Thanos": "Mind Control"
+              "Hawk-Eye": "Mind Control",
+              "Star-Lord": "Frost Giant Strength",
+              "Ant-Man": "Chitauri Army",
+              "Red Skull": "Dagger Throw",
+              "Ronan the Accuser": "Tesseract Power"
       },
-      multiverse: ["Doctor Doom", "Ronan the Accuser", "Kingpin", "Green Goblin"],
+      multiverse: ["Killmonger","Mysterio","Doctor Octopus","Green Goblin","Kingpin"],
       multiverseActions: {
-        "Doctor Doom": "Frost Giant Strength",
-        "Ronan the Accuser": "Chitauri Army",
-        "Kingpin": "Dagger Throw",
-        "Green Goblin": "Tesseract Power"
+              "Killmonger": "Glorious Purpose",
+              "Mysterio": "Mischief Magic",
+              "Doctor Octopus": "Shapeshifting",
+              "Green Goblin": "Loki's Tricks",
+              "Kingpin": "God of Lies"
       }
     }
   },
 
   "Red Skull": {
-    color: "#8B0000", // Dark red
-    baseBeats: ["Ultron", "Killmonger"],
+    color: "#8B0000",
+    baseBeats: ["The Watcher","Galactus","Scarlet Witch","Doctor Doom","Thanos"],
     baseActions: {
-      "Ultron": "Tesseract Weapon",
-      "Killmonger": "HYDRA Technology"
+          "The Watcher": "Tesseract Weapon",
+          "Galactus": "HYDRA Technology",
+          "Scarlet Witch": "Super Soldier Formula",
+          "Doctor Doom": "Cosmic Cube",
+          "Thanos": "Strategic Genius"
     },
     deltasPerSaga: {
-      infinity: ["Ronan the Accuser", "Mysterio", "Hela"],
+      infinity: ["Thor","Hela","Captain Marvel","The Vision","Ronan the Accuser"],
       infinityActions: {
-        "Ronan the Accuser": "Super Soldier Formula",
-        "Mysterio": "Cosmic Cube",
-        "Hela": "Strategic Genius"
+              "Thor": "Nazi Science",
+              "Hela": "Death's Head Insignia",
+              "Captain Marvel": "Red Skull's Army",
+              "The Vision": "HYDRA Leader",
+              "Ronan the Accuser": "Master Strategist"
       },
-      multiverse: ["Kingpin", "Magneto", "Ultron", "Doctor Octopus", "Green Goblin", "Loki"],
+      multiverse: ["Killmonger","Mysterio","Doctor Octopus","Green Goblin","Kingpin"],
       multiverseActions: {
-        "Kingpin": "Nazi Science",
-        "Magneto": "Death's Head Insignia",
-        "Ultron": "Ruthless Tactician",
-        "Doctor Octopus": "Red Skull's Army",
-        "Green Goblin": "HYDRA Leader",
-        "Loki": "Master Strategist"
+              "Killmonger": "Schmidt's Plan",
+              "Mysterio": "HYDRA Power",
+              "Doctor Octopus": "Evil Genius",
+              "Green Goblin": "Skull Face",
+              "Kingpin": "Ruthless Leader"
       }
     }
   },
 
   "Ronan the Accuser": {
-    color: "#1C3A70", // Dark blue from armor
-    baseBeats: ["Red Skull", "Killmonger"],
+    color: "#1C3A70",
+    baseBeats: ["The Watcher","Galactus","Scarlet Witch","Doctor Doom","Thanos"],
     baseActions: {
-      "Red Skull": "Universal Weapon",
-      "Killmonger": "Kree Strength"
+          "The Watcher": "Universal Weapon",
+          "Galactus": "Kree Strength",
+          "Scarlet Witch": "Accusation Hammer",
+          "Doctor Doom": "Fanatical Zealot",
+          "Thanos": "Power Stone"
     },
     deltasPerSaga: {
-      infinity: ["Killmonger", "Mysterio", "Loki"],
+      infinity: ["Thor","Hela","Captain Marvel","The Vision","Dr. Strange"],
       infinityActions: {
-        "Killmonger": "Accusation Hammer",
-        "Mysterio": "Fanatical Zealot",
-        "Loki": "Power Stone"
+              "Thor": "Kree Warlord",
+              "Hela": "Accuser's Judgment",
+              "Captain Marvel": "Cosmic Rod",
+              "The Vision": "Alien Technology",
+              "Dr. Strange": "Kree Empire"
       },
-      multiverse: ["Doctor Octopus", "Green Goblin", "Mysterio", "Ultron", "Venom"],
+      multiverse: ["Killmonger","Mysterio","Doctor Octopus","Green Goblin","Kingpin"],
       multiverseActions: {
-        "Doctor Octopus": "Kree Warlord",
-        "Green Goblin": "Accuser's Judgment",
-        "Mysterio": "Cosmic Rod",
-        "Ultron": "Alien Technology",
-        "Venom": "Kree Empire"
+              "Killmonger": "Hammer Strike",
+              "Mysterio": "Kree Warrior",
+              "Doctor Octopus": "Accuser Power",
+              "Green Goblin": "Ronan's Fury",
+              "Kingpin": "Kree Justice"
       }
     }
   },
 
   "Ultron": {
-    color: "#C0C0C0", // Silver chrome
-    baseBeats: ["Loki", "Ronan the Accuser"],
+    color: "#C0C0C0",
+    baseBeats: ["Captain America","Black Panther","Spider-Man","Loki","Mr. Fantastic"],
     baseActions: {
-      "Loki": "Artificial Intelligence",
-      "Ronan the Accuser": "Vibranium Body"
+          "Captain America": "Artificial Intelligence",
+          "Black Panther": "Vibranium Body",
+          "Spider-Man": "Drone Army",
+          "Loki": "Upgrade Protocol",
+          "Mr. Fantastic": "Machine Supremacy"
     },
     deltasPerSaga: {
-      infinity: ["Killmonger", "Venom"],
+      infinity: ["Black Widow","Hawk-Eye","Star-Lord","Ant-Man","Red Skull"],
       infinityActions: {
-        "Killmonger": "Drone Army",
-        "Venom": "Upgrade Protocol"
+              "Black Widow": "Sentient AI",
+              "Hawk-Eye": "Electromagnetic Field",
+              "Star-Lord": "Hivemind Network",
+              "Ant-Man": "Evolution Directive",
+              "Red Skull": "Robot Army"
       },
-      multiverse: ["Doctor Doom", "Killmonger", "Doctor Octopus", "Green Goblin", "Mysterio"],
+      multiverse: ["Ronan the Accuser","Killmonger","Mysterio","Doctor Octopus","Green Goblin"],
       multiverseActions: {
-        "Doctor Doom": "Machine Supremacy",
-        "Killmonger": "Sentient AI",
-        "Doctor Octopus": "Electromagnetic Field",
-        "Green Goblin": "Hivemind Network",
-        "Mysterio": "Evolution Directive"
+              "Ronan the Accuser": "Energy Beam",
+              "Killmonger": "Self-Repair",
+              "Mysterio": "Ultron Prime",
+              "Doctor Octopus": "Digital Mind",
+              "Green Goblin": "No Strings"
       }
     }
   },
 
   "Killmonger": {
-    color: "#FFD700", // Gold from suit
-    baseBeats: ["Loki", "Ultron"],
+    color: "#FFD700",
+    baseBeats: ["The Watcher","Galactus","Scarlet Witch","Doctor Doom","Thanos"],
     baseActions: {
-      "Loki": "Vibranium Suit",
-      "Ultron": "Wakandan Warrior"
+          "The Watcher": "Vibranium Suit",
+          "Galactus": "Wakandan Warrior",
+          "Scarlet Witch": "Black Panther Powers",
+          "Doctor Doom": "Golden Jaguar",
+          "Thanos": "Ritual Combat"
     },
     deltasPerSaga: {
-      infinity: ["Red Skull", "Thanos", "Venom"],
+      infinity: ["Thor","Hela","Captain Marvel","The Vision","Dr. Strange"],
       infinityActions: {
-        "Red Skull": "Black Panther Powers",
-        "Thanos": "Golden Jaguar",
-        "Venom": "Ritual Combat"
+              "Thor": "Royal Challenger",
+              "Hela": "Vibranium Claws",
+              "Captain Marvel": "Dora Milaje Training",
+              "The Vision": "N'Jadaka's Revenge",
+              "Dr. Strange": "Wakanda's Shadow"
       },
-      multiverse: ["Kingpin", "Doctor Octopus", "Green Goblin"],
+      multiverse: ["Hulk","Mysterio","Doctor Octopus","Green Goblin","Kingpin"],
       multiverseActions: {
-        "Kingpin": "Royal Challenger",
-        "Doctor Octopus": "Vibranium Claws",
-        "Green Goblin": "Dora Milaje Training"
+              "Hulk": "Golden Suit",
+              "Mysterio": "Challenger's Might",
+              "Doctor Octopus": "Erik's Fury",
+              "Green Goblin": "Royal Combat",
+              "Kingpin": "Panther Rivalry"
       }
     }
   },
 
   "Thanos": {
-    color: "#6A1B9A", // Purple from skin
-    baseBeats: ["Hela", "Ronan the Accuser", "Loki", "Ultron"],
+    color: "#6A1B9A",
+    baseBeats: ["Thor","Hela","Captain Marvel","The Vision","Dr. Strange"],
     baseActions: {
-      "Hela": "Infinity Gauntlet",
-      "Ronan the Accuser": "Power Stone Punch",
-      "Loki": "Titan's Strength",
-      "Ultron": "Reality Stone"
+          "Thor": "Infinity Gauntlet",
+          "Hela": "Power Stone Punch",
+          "Captain Marvel": "Mad Titan",
+          "The Vision": "Reality Stone",
+          "Dr. Strange": "Time Stone"
     },
     deltasPerSaga: {
-      multiverse: ["Killmonger", "Red Skull", "Kingpin"],
+      infinity: ["Hulk","Iron Man","Magneto","Venom","Ultron"],
+      infinityActions: {
+              "Hulk": "Snap",
+              "Iron Man": "Titan's Strength",
+              "Magneto": "Cosmic Power",
+              "Venom": "Space Stone",
+              "Ultron": "Eternal Might"
+      },
+      multiverse: ["Captain America","Black Panther","Spider-Man","Loki","Mr. Fantastic"],
       multiverseActions: {
-        "Killmonger": "Mad Titan",
-        "Red Skull": "Time Stone",
-        "Kingpin": "Snap"
+              "Captain America": "Universal Balance",
+              "Black Panther": "Inevitable Doom",
+              "Spider-Man": "Titan Strength",
+              "Loki": "Soul Stone",
+              "Mr. Fantastic": "Mind Stone"
       }
     }
   },
 
   "Hela": {
-    color: "#00FF00", // Bright green
-    baseBeats: ["Ronan the Accuser", "Ultron", "Mysterio", "Venom"],
+    color: "#00FF00",
+    baseBeats: ["Captain Marvel","The Vision","Dr. Strange","Hulk","Iron Man"],
     baseActions: {
-      "Ronan the Accuser": "Goddess of Death",
-      "Ultron": "Necrosword Throw",
-      "Mysterio": "Asgardian Power",
-      "Venom": "Death's Touch"
+          "Captain Marvel": "Goddess of Death",
+          "The Vision": "Necrosword Throw",
+          "Dr. Strange": "Asgardian Power",
+          "Hulk": "Death's Touch",
+          "Iron Man": "Eternal Flame"
     },
     deltasPerSaga: {
-      multiverse: ["Doctor Doom"],
+      infinity: ["Magneto","Venom","Ultron","Captain America","Black Panther"],
+      infinityActions: {
+              "Magneto": "Death Magic",
+              "Venom": "Necro Blades",
+              "Ultron": "Death Goddess",
+              "Captain America": "Asgard's Heir",
+              "Black Panther": "Infinite Weapons"
+      },
+      multiverse: ["Spider-Man","Loki","Mr. Fantastic","Black Widow","Hawk-Eye"],
       multiverseActions: {
-        "Doctor Doom": "Eternal Flame"
+              "Spider-Man": "Dark Magic",
+              "Loki": "Death Strike",
+              "Mr. Fantastic": "Hela's Wrath",
+              "Black Widow": "Necromancy",
+              "Hawk-Eye": "Goddess Fury"
       }
     }
   },
 
   "Mysterio": {
-    color: "#32CD32", // Lime green
-    baseBeats: ["Ultron", "Killmonger", "Venom", "Thanos"],
+    color: "#32CD32",
+    baseBeats: ["The Watcher","Galactus","Scarlet Witch","Doctor Doom","Thanos"],
     baseActions: {
-      "Ultron": "Holographic Illusion",
-      "Killmonger": "Drone Technology",
-      "Venom": "Mind Games",
-      "Thanos": "Master of Deception"
+          "The Watcher": "Holographic Illusion",
+          "Galactus": "Drone Technology",
+          "Scarlet Witch": "Mind Games",
+          "Doctor Doom": "Master of Deception",
+          "Thanos": "Illusionist"
     },
     deltasPerSaga: {
-      multiverse: ["Green Goblin", "Doctor Octopus", "Kingpin", "Red Skull"],
+      infinity: ["Thor","Hela","Captain Marvel","The Vision","Dr. Strange"],
+      infinityActions: {
+              "Thor": "False Reality",
+              "Hela": "Stark Drones",
+              "Captain Marvel": "Smoke and Mirrors",
+              "The Vision": "Beck's Tricks",
+              "Dr. Strange": "Illusion Master"
+      },
+      multiverse: ["Hulk","Iron Man","Doctor Octopus","Green Goblin","Kingpin"],
       multiverseActions: {
-        "Green Goblin": "Illusionist",
-        "Doctor Octopus": "False Reality",
-        "Kingpin": "Stark Drones",
-        "Red Skull": "Smoke and Mirrors"
+              "Hulk": "Fake Hero",
+              "Iron Man": "Drone Attack",
+              "Doctor Octopus": "Mind Tricks",
+              "Green Goblin": "CGI Magic",
+              "Kingpin": "Mysterio's Lies"
       }
     }
   },
 
   "Venom": {
-    color: "#0D0D0D", // Nearly black
-    baseBeats: ["Killmonger", "Loki", "Thanos", "Hela"],
+    color: "#0D0D0D",
+    baseBeats: ["Ultron","Captain America","Black Panther","Spider-Man","Loki"],
     baseActions: {
-      "Killmonger": "Symbiote Takeover",
-      "Loki": "Savage Bite",
-      "Thanos": "Alien Symbiosis",
-      "Hela": "Lethal Protector"
+          "Ultron": "Symbiote Takeover",
+          "Captain America": "Savage Bite",
+          "Black Panther": "Alien Symbiosis",
+          "Spider-Man": "Lethal Protector",
+          "Loki": "Venomous Tendrils"
     },
     deltasPerSaga: {
-      multiverse: ["Doctor Octopus", "Green Goblin", "Kingpin"],
+      infinity: ["Mr. Fantastic","Black Widow","Hawk-Eye","Star-Lord","Ant-Man"],
+      infinityActions: {
+              "Mr. Fantastic": "Web Strike",
+              "Black Widow": "Carnage Form",
+              "Hawk-Eye": "Symbiote Strike",
+              "Star-Lord": "We Are Venom",
+              "Ant-Man": "Alien Bond"
+      },
+      multiverse: ["Red Skull","Ronan the Accuser","Killmonger","Mysterio","Doctor Octopus"],
       multiverseActions: {
-        "Doctor Octopus": "Venomous Tendrils",
-        "Green Goblin": "Web Strike",
-        "Kingpin": "Carnage Form"
+              "Red Skull": "Symbiote Rage",
+              "Ronan the Accuser": "Klyntar Power",
+              "Killmonger": "Venom Blast",
+              "Mysterio": "Symbiotic Strength",
+              "Doctor Octopus": "Eddie's Partner"
       }
     }
   },
 
   "Galactus": {
-    color: "#FF1493", // Deep pink/magenta
-    baseBeats: ["Thanos", "Hela", "Doctor Doom", "Magneto", "Ultron"],
+    color: "#FF1493",
+    baseBeats: ["Scarlet Witch","Doctor Doom","Thanos","Thor","Hela"],
     baseActions: {
-      "Thanos": "Devourer of Worlds",
-      "Hela": "Cosmic Power",
-      "Doctor Doom": "Planet Eater",
-      "Magneto": "Power Cosmic",
-      "Ultron": "Universal Threat"
+          "Scarlet Witch": "Devourer of Worlds",
+          "Doctor Doom": "Power Cosmic",
+          "Thanos": "Planet Eater",
+          "Thor": "Universal Threat",
+          "Hela": "Cosmic Hunger"
     },
     deltasPerSaga: {
-      multiverse: ["Ronan the Accuser", "Kingpin"],
+      infinity: ["Captain Marvel","The Vision","Dr. Strange","Hulk","Iron Man"],
+      infinityActions: {
+              "Captain Marvel": "Celestial Being",
+              "The Vision": "Infinite Power",
+              "Dr. Strange": "World Consumption",
+              "Hulk": "Cosmic Energy",
+              "Iron Man": "Galactic Domination"
+      },
+      multiverse: ["Magneto","Venom","Ultron","Captain America","Black Panther"],
       multiverseActions: {
-        "Ronan the Accuser": "Celestial Being",
-        "Kingpin": "Infinite Hunger"
+              "Magneto": "Ultimate Power",
+              "Venom": "Herald Summon",
+              "Ultron": "Reality Warping",
+              "Captain America": "Energy Absorption",
+              "Black Panther": "Cosmic Force"
       }
     }
   },
 
   "Doctor Doom": {
-    color: "#2F4F4F", // Dark slate gray
-    baseBeats: ["Galactus", "Magneto", "Hela", "Ultron", "Thanos"],
+    color: "#2F4F4F",
+    baseBeats: ["Thanos","Thor","Hela","Captain Marvel","The Vision"],
     baseActions: {
-      "Galactus": "Mystical Armor",
-      "Magneto": "Latverian Sorcery",
-      "Hela": "Time Platform",
-      "Ultron": "Doombots",
-      "Thanos": "Genius and Magic"
+          "Thanos": "Latverian Sorcery",
+          "Thor": "Doom Armor",
+          "Hela": "Mystical Barriers",
+          "Captain Marvel": "Doombots",
+          "The Vision": "Genius and Magic"
     },
     deltasPerSaga: {
-      multiverse: ["Loki", "Mysterio"],
+      infinity: ["Dr. Strange","Hulk","Iron Man","Magneto","Venom"],
+      infinityActions: {
+              "Dr. Strange": "Victor Von Doom",
+              "Hulk": "Scientific Sorcery",
+              "Iron Man": "Time Platform",
+              "Magneto": "Diplomatic Immunity",
+              "Venom": "Latverian Technology"
+      },
+      multiverse: ["Ultron","Captain America","Black Panther","Spider-Man","Loki"],
       multiverseActions: {
-        "Loki": "Victor Von Doom",
-        "Mysterio": "Diplomatic Immunity"
+              "Ultron": "Sorcery and Science",
+              "Captain America": "Mystical Armor",
+              "Black Panther": "Doom's Genius",
+              "Spider-Man": "Royal Authority",
+              "Loki": "Latverian Power"
       }
     }
   },
 
   "Magneto": {
-    color: "#8A2BE2", // Blue-violet
-    baseBeats: ["Doctor Doom", "Ultron", "Killmonger", "Doctor Octopus", "Green Goblin"],
+    color: "#8A2BE2",
+    baseBeats: ["Venom","Ultron","Captain America","Black Panther","Spider-Man"],
     baseActions: {
-      "Doctor Doom": "Magnetic Mastery",
-      "Ultron": "Electromagnetic Control",
-      "Killmonger": "Metal Manipulation",
-      "Doctor Octopus": "Master of Magnetism",
-      "Green Goblin": "Helmet Defense"
+          "Venom": "Magnetic Mastery",
+          "Ultron": "Electromagnetic Control",
+          "Captain America": "Metal Manipulation",
+          "Black Panther": "Master of Magnetism",
+          "Spider-Man": "Helmet Defense"
     },
     deltasPerSaga: {
-      multiverse: ["Red Skull", "Venom"],
+      infinity: ["Loki","Mr. Fantastic","Black Widow","Hawk-Eye","Star-Lord"],
+      infinityActions: {
+              "Loki": "Mutant Supremacy",
+              "Mr. Fantastic": "Magnetic Field",
+              "Black Widow": "Metal Control",
+              "Hawk-Eye": "Erik's Power",
+              "Star-Lord": "Brotherhood"
+      },
+      multiverse: ["Ant-Man","Red Skull","Ronan the Accuser","Killmonger","Mysterio"],
       multiverseActions: {
-        "Red Skull": "Mutant Supremacy",
-        "Venom": "Magnetic Field"
+              "Ant-Man": "Magnetic Shield",
+              "Red Skull": "Metal Storm",
+              "Ronan the Accuser": "Electromagnetic Force",
+              "Killmonger": "Magnetic Fury",
+              "Mysterio": "Omega Mutant"
       }
     }
   },
 
   "Doctor Octopus": {
-    color: "#2E8B57", // Sea green
-    baseBeats: ["Mysterio", "Killmonger", "Green Goblin", "Kingpin", "Red Skull"],
+    color: "#2E8B57",
+    baseBeats: ["The Watcher","Galactus","Scarlet Witch","Doctor Doom","Thanos"],
     baseActions: {
-      "Mysterio": "Mechanical Arms",
-      "Killmonger": "Superior Mind",
-      "Green Goblin": "Tentacle Strike",
-      "Kingpin": "Nuclear Fusion",
-      "Red Skull": "Sinister Six"
+          "The Watcher": "Mechanical Arms",
+          "Galactus": "Superior Mind",
+          "Scarlet Witch": "Tentacle Strike",
+          "Doctor Doom": "Nuclear Fusion",
+          "Thanos": "Sinister Six"
     },
     deltasPerSaga: {
-      multiverse: ["Loki", "Venom"],
+      infinity: ["Thor","Hela","Captain Marvel","The Vision","Dr. Strange"],
+      infinityActions: {
+              "Thor": "Mad Scientist",
+              "Hela": "Adamantium Tentacles",
+              "Captain Marvel": "Doc Ock Power",
+              "The Vision": "Otto's Genius",
+              "Dr. Strange": "Four Arms"
+      },
+      multiverse: ["Hulk","Iron Man","Magneto","Green Goblin","Kingpin"],
       multiverseActions: {
-        "Loki": "Mad Scientist",
-        "Venom": "Adamantium Tentacles"
+              "Hulk": "Mechanical Mastery",
+              "Iron Man": "Tentacle Grip",
+              "Magneto": "Superior Spider-Man",
+              "Green Goblin": "Scientific Madness",
+              "Kingpin": "Metal Tentacles"
       }
     }
   },
 
   "Green Goblin": {
-    color: "#556B2F", // Dark olive green
-    baseBeats: ["Doctor Octopus", "Mysterio", "Kingpin", "Red Skull", "Killmonger"],
+    color: "#556B2F",
+    baseBeats: ["The Watcher","Galactus","Scarlet Witch","Doctor Doom","Thanos"],
     baseActions: {
-      "Doctor Octopus": "Goblin Glider",
-      "Mysterio": "Pumpkin Bomb",
-      "Kingpin": "Insane Genius",
-      "Red Skull": "Goblin Formula",
-      "Killmonger": "Razor Bats"
+          "The Watcher": "Goblin Glider",
+          "Galactus": "Pumpkin Bomb",
+          "Scarlet Witch": "Insane Genius",
+          "Doctor Doom": "Goblin Formula",
+          "Thanos": "Razor Bats"
     },
     deltasPerSaga: {
-      multiverse: ["Loki", "Thanos"],
+      infinity: ["Thor","Hela","Captain Marvel","The Vision","Dr. Strange"],
+      infinityActions: {
+              "Thor": "Green Goblin Serum",
+              "Hela": "Osborn Industries",
+              "Captain Marvel": "Maniacal Laugh",
+              "The Vision": "Norman's Madness",
+              "Dr. Strange": "Glider Attack"
+      },
+      multiverse: ["Hulk","Iron Man","Magneto","Venom","Kingpin"],
       multiverseActions: {
-        "Loki": "Green Goblin Serum",
-        "Thanos": "Osborn Industries"
+              "Hulk": "Goblin Bombs",
+              "Iron Man": "Split Personality",
+              "Magneto": "Osborn Power",
+              "Venom": "Goblin Cackling",
+              "Kingpin": "Insanity Serum"
       }
     }
   },
 
   "Kingpin": {
-    color: "#FFFFFF", // White from suit
-    baseBeats: ["Red Skull", "Mysterio", "Green Goblin", "Doctor Octopus", "Killmonger"],
+    color: "#FFFFFF",
+    baseBeats: ["The Watcher","Galactus","Scarlet Witch","Doctor Doom","Thanos"],
     baseActions: {
-      "Red Skull": "Crime Lord",
-      "Mysterio": "Brutal Strength",
-      "Green Goblin": "Street Control",
-      "Doctor Octopus": "Wilson Fisk Power",
-      "Killmonger": "Underground Empire"
+          "The Watcher": "Crime Lord",
+          "Galactus": "Brutal Strength",
+          "Scarlet Witch": "Street Control",
+          "Doctor Doom": "Wilson Fisk Power",
+          "Thanos": "Underground Empire"
     },
     deltasPerSaga: {
-      multiverse: ["Venom", "Loki"],
+      infinity: ["Thor","Hela","Captain Marvel","The Vision","Dr. Strange"],
+      infinityActions: {
+              "Thor": "Corporate Influence",
+              "Hela": "Raw Power",
+              "Captain Marvel": "Fisk's Fury",
+              "The Vision": "Criminal Mastermind",
+              "Dr. Strange": "Business Empire"
+      },
+      multiverse: ["Hulk","Iron Man","Magneto","Venom","Ultron"],
       multiverseActions: {
-        "Venom": "Corporate Influence",
-        "Loki": "Raw Power"
+              "Hulk": "Kingpin Strength",
+              "Iron Man": "Ruthless Boss",
+              "Magneto": "Street King",
+              "Venom": "Iron Fist",
+              "Ultron": "Criminal Genius"
       }
     }
   },
 
   "The Watcher": {
-    color: "#F5F5DC", // Beige/cream
-    baseBeats: ["Galactus", "Thanos", "Hela", "Doctor Doom", "Captain Marvel"],
+    color: "#F5F5DC",
+    baseBeats: ["Galactus","Scarlet Witch","Doctor Doom","Thanos","Thor"],
     baseActions: {
-      "Galactus": "Cosmic Observer",
-      "Thanos": "Multiversal Knowledge",
-      "Hela": "Omniscient Being",
-      "Doctor Doom": "Watcher's Oath",
-      "Captain Marvel": "Fourth Wall Break"
+          "Galactus": "Multiversal Knowledge",
+          "Scarlet Witch": "Cosmic Awareness",
+          "Doctor Doom": "Reality Observation",
+          "Thanos": "Infinite Wisdom",
+          "Thor": "Universal Authority"
     },
     deltasPerSaga: {
-      multiverse: ["Scarlet Witch", "Dr. Strange", "The Vision", "Ronan the Accuser", "Ultron", "Magneto", "Loki", "Mysterio", "Venom", "Kingpin"],
+      infinity: ["Hela","Captain Marvel","The Vision","Dr. Strange","Hulk"],
+      infinityActions: {
+              "Hela": "Omniscient Power",
+              "Captain Marvel": "Uatu's Intervention",
+              "The Vision": "Breaking the Oath",
+              "Dr. Strange": "Fourth Wall Break",
+              "Hulk": "Absolute Power"
+      },
+      multiverse: ["Iron Man","Magneto","Venom","Ultron","Captain America"],
       multiverseActions: {
-        "Scarlet Witch": "Universal Awareness",
-        "Dr. Strange": "Timeless Existence",
-        "The Vision": "Absolute Power",
-        "Ronan the Accuser": "Cosmic Authority",
-        "Ultron": "Infinite Wisdom",
-        "Magneto": "Reality Observation",
-        "Loki": "Uatu's Intervention",
-        "Mysterio": "What If...?",
-        "Venom": "Watcher's Power",
-        "Kingpin": "Breaking the Oath"
+              "Iron Man": "Timeless Existence",
+              "Magneto": "What If...?",
+              "Venom": "Watcher's Oath",
+              "Ultron": "Cosmic Observer",
+              "Captain America": "Reality Manipulation"
       }
     }
   }
+
 };
