@@ -4,7 +4,7 @@
  * Core game logic for determining winners and AI opponent selection
  */
 
-import { getCharactersForSaga, determineWinner } from '../helpers/saga';
+import { getCharactersForSaga, determineWinner } from '../helpers/saga.js';
 
 /**
  * Gets a random character from the available characters
