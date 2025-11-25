@@ -6,7 +6,6 @@ import Header from './components/Header';
 import GameBoard from './components/GameBoard';
 import HelpModal from './components/HelpModal';
 import OpponentSelector from './components/OpponentSelector';
-import AlignmentSelector from './components/AlignmentSelector';
 import SagaSelector from './components/SagaSelector';
 import GamePlay from './components/GamePlay';
 import './App.css';
@@ -25,9 +24,9 @@ function App() {
   const [showHelpModal, setShowHelpModal] = useState(false);
 
   // Game setup state
-  const [gameStage, setGameStage] = useState('opponent'); // opponent, alignment, saga, playing
+  const [gameStage, setGameStage] = useState('opponent'); // opponent, saga, playing
   const [opponentType, setOpponentType] = useState(null); // 'computer' or 'player'
-  const [gameMode, setGameMode] = useState(null); // 'heroes', 'villains', or 'mixed'
+  const [gameMode] = useState('mixed'); // Always 'mixed' mode
   const [saga, setSaga] = useState(null); // 'avengers', 'infinity', or 'multiverse'
 
   // Session data
@@ -44,11 +43,6 @@ function App() {
 
   const handleOpponentSelect = (type) => {
     setOpponentType(type);
-    setGameStage('alignment');
-  };
-
-  const handleAlignmentSelect = (mode) => {
-    setGameMode(mode);
     setGameStage('saga');
   };
 
@@ -89,7 +83,6 @@ function App() {
     // Reset game
     setGameStage('opponent');
     setOpponentType(null);
-    setGameMode(null);
     setSaga(null);
     setCurrentSessionResults([]);
   };
@@ -98,8 +91,6 @@ function App() {
     switch (gameStage) {
       case 'opponent':
         return <OpponentSelector onSelect={handleOpponentSelect} />;
-      case 'alignment':
-        return <AlignmentSelector onSelect={handleAlignmentSelect} />;
       case 'saga':
         return <SagaSelector gameMode={gameMode} onSelect={handleSagaSelect} />;
       case 'playing':

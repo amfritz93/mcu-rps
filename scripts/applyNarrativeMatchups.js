@@ -6,6 +6,7 @@
  */
 
 import fs from 'fs';
+import { avengersBase as avengersBaseBeats, infinityDelta as infinityDeltaBeats, multiverseDelta as multiverseDeltaBeats } from './redesignForAllModes.js';
 
 // Character colors (MCU-accurate)
 const characterColors = {
@@ -199,75 +200,6 @@ const characterActions = {
     infinityAction: null,
     multiverseAction: 'Cosmic Observer'
   }
-};
-
-// Import matchup data from previous script
-const avengersBaseBeats = {
-  'Captain America': ['Black Widow', 'Hulk', 'Loki', 'Red Skull'],
-  'Iron Man': ['Captain America', 'Black Widow', 'Ultron', 'Ronan the Accuser'],
-  'Thor': ['Iron Man', 'Captain America', 'Loki', 'Killmonger'],
-  'Hulk': ['Thor', 'Iron Man', 'Ultron', 'Ronan the Accuser'],
-  'Black Widow': ['Hulk', 'Thor', 'Red Skull', 'Killmonger'],
-  'Loki': ['Red Skull', 'Killmonger', 'Iron Man', 'Black Widow'],
-  'Red Skull': ['Ronan the Accuser', 'Ultron', 'Thor', 'Hulk'],
-  'Ronan the Accuser': ['Loki', 'Ultron', 'Captain America', 'Black Widow'],
-  'Ultron': ['Killmonger', 'Loki', 'Captain America', 'Thor'],
-  'Killmonger': ['Red Skull', 'Ronan the Accuser', 'Iron Man', 'Hulk']
-};
-
-const infinityDeltaBeats = {
-  'Captain America': ['Spider-Man', 'Black Panther', 'Scarlet Witch', 'Thanos', 'Venom'],
-  'Iron Man': ['Spider-Man', 'Dr. Strange', 'Black Panther', 'Hela', 'Mysterio'],
-  'Thor': ['Dr. Strange', 'Scarlet Witch', 'Thanos', 'Hela', 'Mysterio'],
-  'Hulk': ['Spider-Man', 'Black Panther', 'Scarlet Witch', 'Hela', 'Venom'],
-  'Black Widow': ['Spider-Man', 'Dr. Strange', 'Black Panther', 'Thanos', 'Mysterio'],
-  'Spider-Man': ['Dr. Strange', 'Scarlet Witch', 'Loki', 'Ultron', 'Killmonger', 'Thanos', 'Mysterio', 'Venom', 'Black Panther'],
-  'Dr. Strange': ['Black Panther', 'Hulk', 'Red Skull', 'Ronan the Accuser', 'Ultron', 'Killmonger', 'Hela', 'Mysterio', 'Venom'],
-  'Black Panther': ['Scarlet Witch', 'Loki', 'Red Skull', 'Ronan the Accuser', 'Killmonger', 'Thanos', 'Hela', 'Mysterio', 'Venom'],
-  'Scarlet Witch': ['Captain America', 'Iron Man', 'Thor', 'Loki', 'Red Skull', 'Ultron', 'Thanos', 'Hela', 'Venom'],
-  'Loki': ['Spider-Man', 'Dr. Strange', 'Black Panther', 'Hela', 'Mysterio'],
-  'Red Skull': ['Spider-Man', 'Scarlet Witch', 'Thanos', 'Mysterio', 'Venom'],
-  'Ronan the Accuser': ['Spider-Man', 'Dr. Strange', 'Scarlet Witch', 'Thanos', 'Venom'],
-  'Ultron': ['Dr. Strange', 'Black Panther', 'Black Widow', 'Hela', 'Mysterio'],
-  'Killmonger': ['Spider-Man', 'Scarlet Witch', 'Thanos', 'Hela', 'Venom'],
-  'Thanos': ['Iron Man', 'Thor', 'Hulk', 'Dr. Strange', 'Loki', 'Red Skull', 'Ultron', 'Hela', 'Mysterio'],
-  'Hela': ['Captain America', 'Iron Man', 'Black Widow', 'Dr. Strange', 'Ronan the Accuser', 'Killmonger', 'Thanos', 'Mysterio', 'Venom'],
-  'Mysterio': ['Captain America', 'Thor', 'Hulk', 'Spider-Man', 'Loki', 'Ronan the Accuser', 'Thanos', 'Hela', 'Venom'],
-  'Venom': ['Thor', 'Black Widow', 'Spider-Man', 'Black Panther', 'Red Skull', 'Ronan the Accuser', 'Ultron', 'Killmonger', 'Mysterio']
-};
-
-const multiverseDeltaBeats = {
-  'Captain America': ['Hawk-Eye', 'The Vision', 'Star-Lord', 'Galactus', 'Magneto', 'Doctor Octopus'],
-  'Iron Man': ['Ant-Man', 'Captain Marvel', 'Mr. Fantastic', 'Doctor Doom', 'Green Goblin', 'The Watcher'],
-  'Thor': ['Hawk-Eye', 'Star-Lord', 'Ant-Man', 'Magneto', 'Doctor Octopus', 'Kingpin'],
-  'Hulk': ['The Vision', 'Captain Marvel', 'Mr. Fantastic', 'Galactus', 'Green Goblin', 'The Watcher'],
-  'Black Widow': ['Hawk-Eye', 'Ant-Man', 'Mr. Fantastic', 'Doctor Doom', 'Magneto', 'Kingpin'],
-  'Spider-Man': ['The Vision', 'Star-Lord', 'Captain Marvel', 'Galactus', 'Doctor Doom', 'Kingpin'],
-  'Dr. Strange': ['Hawk-Eye', 'Star-Lord', 'Ant-Man', 'Galactus', 'Doctor Octopus', 'Green Goblin'],
-  'Black Panther': ['The Vision', 'Captain Marvel', 'Mr. Fantastic', 'Doctor Doom', 'Green Goblin', 'The Watcher'],
-  'Scarlet Witch': ['Hawk-Eye', 'Star-Lord', 'Ant-Man', 'Magneto', 'Kingpin', 'The Watcher'],
-  'Hawk-Eye': ['The Vision', 'Star-Lord', 'Ant-Man', 'Captain Marvel', 'Mr. Fantastic', 'Loki', 'Red Skull', 'Ronan the Accuser', 'Thanos', 'Mysterio', 'Galactus', 'Doctor Doom', 'Green Goblin', 'Kingpin', 'The Watcher'],
-  'The Vision': ['Star-Lord', 'Ant-Man', 'Captain Marvel', 'Mr. Fantastic', 'Red Skull', 'Ultron', 'Killmonger', 'Hela', 'Venom', 'Galactus', 'Magneto', 'Doctor Octopus', 'Green Goblin', 'Kingpin', 'The Watcher'],
-  'Star-Lord': ['Ant-Man', 'Captain Marvel', 'Mr. Fantastic', 'Loki', 'Ronan the Accuser', 'Killmonger', 'Thanos', 'Venom', 'Galactus', 'Doctor Doom', 'Magneto', 'Doctor Octopus', 'Green Goblin', 'Kingpin', 'The Watcher'],
-  'Ant-Man': ['Captain Marvel', 'Mr. Fantastic', 'Loki', 'Red Skull', 'Ultron', 'Thanos', 'Hela', 'Mysterio', 'Galactus', 'Doctor Doom', 'Magneto', 'Doctor Octopus', 'Green Goblin', 'Kingpin', 'The Watcher'],
-  'Captain Marvel': ['Mr. Fantastic', 'Loki', 'Ronan the Accuser', 'Ultron', 'Killmonger', 'Thanos', 'Hela', 'Mysterio', 'Venom', 'Doctor Doom', 'Magneto', 'Doctor Octopus', 'Green Goblin', 'Kingpin', 'The Watcher'],
-  'Mr. Fantastic': ['Loki', 'Red Skull', 'Ronan the Accuser', 'Killmonger', 'Thanos', 'Hela', 'Mysterio', 'Venom', 'Galactus', 'Doctor Doom', 'Magneto', 'Doctor Octopus', 'Green Goblin', 'Kingpin', 'The Watcher'],
-  'Loki': ['Hawk-Eye', 'The Vision', 'Ant-Man', 'Galactus', 'Magneto', 'Green Goblin'],
-  'Red Skull': ['Star-Lord', 'Captain Marvel', 'Mr. Fantastic', 'Doctor Doom', 'Doctor Octopus', 'The Watcher'],
-  'Ronan the Accuser': ['Hawk-Eye', 'The Vision', 'Captain Marvel', 'Galactus', 'Kingpin', 'The Watcher'],
-  'Ultron': ['Hawk-Eye', 'Star-Lord', 'Ant-Man', 'Doctor Doom', 'Magneto', 'Doctor Octopus'],
-  'Killmonger': ['The Vision', 'Star-Lord', 'Mr. Fantastic', 'Galactus', 'Green Goblin', 'Kingpin'],
-  'Thanos': ['Captain America', 'Iron Man', 'Black Widow', 'Hawk-Eye', 'Magneto', 'Doctor Octopus'],
-  'Hela': ['Thor', 'Hulk', 'Spider-Man', 'Star-Lord', 'Ant-Man', 'Green Goblin'],
-  'Mysterio': ['Black Panther', 'Scarlet Witch', 'The Vision', 'Captain Marvel', 'Doctor Doom', 'Kingpin'],
-  'Venom': ['Captain America', 'Scarlet Witch', 'Hawk-Eye', 'Mr. Fantastic', 'Galactus', 'The Watcher'],
-  'Galactus': ['Captain America', 'Iron Man', 'Thor', 'Hulk', 'Black Widow', 'Spider-Man', 'Dr. Strange', 'Black Panther', 'Scarlet Witch', 'Doctor Doom', 'Magneto', 'Doctor Octopus', 'Green Goblin', 'Kingpin', 'The Watcher'],
-  'Doctor Doom': ['Captain America', 'Thor', 'Hulk', 'Spider-Man', 'Dr. Strange', 'Scarlet Witch', 'Loki', 'Ronan the Accuser', 'Thanos', 'Hela', 'Magneto', 'Doctor Octopus', 'Green Goblin', 'Kingpin', 'The Watcher'],
-  'Magneto': ['Iron Man', 'Black Widow', 'Dr. Strange', 'Black Panther', 'Hawk-Eye', 'Star-Lord', 'Mr. Fantastic', 'Red Skull', 'Killmonger', 'Venom', 'Galactus', 'Doctor Octopus', 'Green Goblin', 'Kingpin', 'The Watcher'],
-  'Doctor Octopus': ['Iron Man', 'Black Widow', 'Spider-Man', 'Black Panther', 'The Vision', 'Ant-Man', 'Captain Marvel', 'Loki', 'Ultron', 'Mysterio', 'Galactus', 'Doctor Doom', 'Green Goblin', 'Kingpin', 'The Watcher'],
-  'Green Goblin': ['Black Widow', 'Dr. Strange', 'Scarlet Witch', 'Star-Lord', 'Ant-Man', 'Captain Marvel', 'Mr. Fantastic', 'Ronan the Accuser', 'Thanos', 'Venom', 'Galactus', 'Doctor Doom', 'Magneto', 'Kingpin', 'The Watcher'],
-  'Kingpin': ['Captain America', 'Black Widow', 'Black Panther', 'Hawk-Eye', 'The Vision', 'Captain Marvel', 'Mr. Fantastic', 'Red Skull', 'Killmonger', 'Hela', 'Galactus', 'Doctor Doom', 'Magneto', 'Doctor Octopus', 'Green Goblin'],
-  'The Watcher': ['Thor', 'Hulk', 'Spider-Man', 'Dr. Strange', 'Scarlet Witch', 'Ant-Man', 'Loki', 'Ultron', 'Thanos', 'Mysterio', 'Galactus', 'Doctor Doom', 'Magneto', 'Doctor Octopus', 'Kingpin']
 };
 
 // Build character registry

@@ -1,23 +1,23 @@
 /**
  * SagaSelector Component
  *
- * Third stage of game setup - choose saga/difficulty:
- * - Avengers Saga (5 characters per alignment)
- * - Infinity Saga (9 characters per alignment)
- * - Multiverse Saga (15 characters per alignment)
+ * Second stage of game setup - choose saga/difficulty:
+ * - Avengers Saga (10 characters)
+ * - Infinity Saga (18 characters)
+ * - Multiverse Saga (31 characters)
  */
 
 import { getSagaOptions } from '../helpers/menu-wheel';
 import MenuWheel from './MenuWheel';
 
-function SagaSelector({ gameMode, onSelect }) {
-  const options = getSagaOptions(gameMode).map(saga => ({
+function SagaSelector({ onSelect }) {
+  const options = getSagaOptions().map(saga => ({
     key: saga.key,
     name: saga.name,
     color: saga.key === 'avengers' ? '#10B981' : saga.key === 'infinity' ? '#F59E0B' : '#EF4444'
   }));
 
-  const sagaDetails = getSagaOptions(gameMode);
+  const sagaDetails = getSagaOptions();
 
   return (
     <div className="flex flex-col items-center justify-center min-h-[400px]">

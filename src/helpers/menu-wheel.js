@@ -64,57 +64,40 @@ function isVillain(characterName) {
 
 /**
  * Gets the menu wheel configuration for character selection
+ * Always returns dual-wheel layout (heroes vs villains)
  *
- * @param {string} gameMode - 'heroes', 'villains', or 'mixed'
+ * @param {string} gameMode - Always 'mixed'
  * @param {string} sagaKey - 'avengers', 'infinity', or 'multiverse'
  * @returns {Object} Menu wheel configuration object
  */
 export function getMenuWheelConfig(gameMode, sagaKey) {
   const allCharacters = getCharactersForSaga(gameMode, sagaKey);
 
-  // Single-wheel layout for heroes-only or villains-only
-  if (gameMode === 'heroes' || gameMode === 'villains') {
-    return {
-      layout: 'single-wheel',
-      wheel: {
-        type: gameMode, // 'heroes' or 'villains'
-        characters: allCharacters
-      }
-    };
-  }
+  const heroes = allCharacters.filter(char => isHero(char.name));
+  const villains = allCharacters.filter(char => isVillain(char.name));
+  const watcher = allCharacters.find(char => char.name === 'The Watcher');
 
-  // Dual-wheel layout for mixed mode
-  if (gameMode === 'mixed') {
-    const heroes = allCharacters.filter(char => isHero(char.name));
-    const villains = allCharacters.filter(char => isVillain(char.name));
-    const watcher = allCharacters.find(char => char.name === 'The Watcher');
-
-    const config = {
-      layout: watcher ? 'dual-wheel-with-center' : 'dual-wheel',
-      leftWheel: {
-        type: 'heroes',
-        characters: heroes
-      },
-      rightWheel: {
-        type: 'villains',
-        characters: villains
-      }
-    };
-
-    // Add The Watcher center button only for multiverse saga
-    if (watcher) {
-      config.centerButton = {
-        type: 'neutral',
-        character: watcher
-      };
+  const config = {
+    layout: watcher ? 'dual-wheel-with-center' : 'dual-wheel',
+    leftWheel: {
+      type: 'heroes',
+      characters: heroes
+    },
+    rightWheel: {
+      type: 'villains',
+      characters: villains
     }
+  };
 
-    return config;
+  // Add The Watcher center button only for multiverse saga
+  if (watcher) {
+    config.centerButton = {
+      type: 'neutral',
+      character: watcher
+    };
   }
 
-  // Fallback - should never reach here
-  console.error(`Invalid game mode: ${gameMode}`);
-  return null;
+  return config;
 }
 
 /**
@@ -125,18 +108,8 @@ export function getMenuWheelConfig(gameMode, sagaKey) {
 export function getGameModeOptions() {
   return [
     {
-      key: 'heroes',
-      name: 'Heroes',
-      description: 'Play as the good guys of the MCU'
-    },
-    {
-      key: 'villains',
-      name: 'Villains',
-      description: 'Play as the bad guys of the MCU'
-    },
-    {
       key: 'mixed',
-      name: 'Mixed',
+      name: 'Heroes & Villains',
       description: 'Play with both heroes and villains'
     }
   ];
@@ -145,34 +118,27 @@ export function getGameModeOptions() {
 /**
  * Gets saga selection options for the difficulty screen
  *
- * @param {string} gameMode - The selected game mode
  * @returns {Object[]} Array of saga options with metadata
  */
-export function getSagaOptions(gameMode) {
-  const characterCounts = {
-    heroes: { avengers: 5, infinity: 9, multiverse: 15 },
-    villains: { avengers: 5, infinity: 9, multiverse: 15 },
-    mixed: { avengers: 10, infinity: 18, multiverse: 31 }
-  };
-
+export function getSagaOptions() {
   return [
     {
       key: 'avengers',
       name: 'Avengers Saga',
       difficulty: 1,
-      characterCount: characterCounts[gameMode].avengers
+      characterCount: 10
     },
     {
       key: 'infinity',
       name: 'Infinity Saga',
       difficulty: 2,
-      characterCount: characterCounts[gameMode].infinity
+      characterCount: 18
     },
     {
       key: 'multiverse',
       name: 'Multiverse Saga',
       difficulty: 3,
-      characterCount: characterCounts[gameMode].multiverse
+      characterCount: 31
     }
   ];
 }
