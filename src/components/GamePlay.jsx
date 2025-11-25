@@ -10,7 +10,8 @@
 
 import { useState } from 'react';
 import CharacterSelector from './CharacterSelector';
-import { getRandomCharacter, playRound, getCharacterByName } from '../utils/gameLogic';
+import { getRandomCharacter, getCharacterByName } from '../utils/gameLogic';
+import { determineWinner } from '../helpers/saga.js';
 
 function GamePlay({
   gameMode,
@@ -36,12 +37,12 @@ function GamePlay({
       const playerChar = getCharacterByName(characterName, gameMode, saga);
 
       // Determine winner using the actual character objects
-      const result = playRound(characterName, computerChar.name, gameMode, saga);
+      const result = determineWinner(playerChar, computerChar);
 
       setRoundResult({
         ...result,
         playerCharacter: playerChar,
-        opponentCharacter: computerChar, // Use the computerChar we already have
+        opponentCharacter: computerChar,
         isPlayerWin: result.winner?.name === characterName
       });
       setRoundStage('result');
@@ -54,10 +55,12 @@ function GamePlay({
   const handleOpponentSelect = (characterName) => {
     setOpponentSelection(characterName);
 
-    // Determine winner
-    const result = playRound(playerSelection, characterName, gameMode, saga);
+    // Get character objects
     const playerChar = getCharacterByName(playerSelection, gameMode, saga);
     const opponentChar = getCharacterByName(characterName, gameMode, saga);
+
+    // Determine winner
+    const result = determineWinner(playerChar, opponentChar);
 
     setRoundResult({
       ...result,
