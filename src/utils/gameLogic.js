@@ -4,18 +4,19 @@
  * Core game logic for determining winners and AI opponent selection
  */
 
-import { getCharactersForSaga, determineWinner } from '../helpers/saga.js';
+import { getCharactersForThreatLevel, determineWinner } from '../helpers/saga.js';
 
 /**
  * Gets a random character from the available characters
  * Used for computer opponent selection
  *
+ * @param {string} threatLevel - 'street', 'skilled', 'tech', 'enhanced', 'god', or 'cosmic'
  * @param {string} gameMode - 'heroes', 'villains', or 'mixed'
- * @param {string} saga - 'avengers', 'infinity', or 'multiverse'
+ * @param {string} difficulty - 'easy', 'medium', or 'hard'
  * @returns {Object} Random character object
  */
-export function getRandomCharacter(gameMode, saga) {
-  const characters = getCharactersForSaga(gameMode, saga);
+export function getRandomCharacter(threatLevel, gameMode, difficulty) {
+  const characters = getCharactersForThreatLevel(threatLevel, gameMode, difficulty);
   const randomIndex = Math.floor(Math.random() * characters.length);
   return characters[randomIndex];
 }
@@ -24,12 +25,13 @@ export function getRandomCharacter(gameMode, saga) {
  * Gets a character by name from the current game configuration
  *
  * @param {string} characterName - Name of the character
+ * @param {string} threatLevel - 'street', 'skilled', 'tech', 'enhanced', 'god', or 'cosmic'
  * @param {string} gameMode - 'heroes', 'villains', or 'mixed'
- * @param {string} saga - 'avengers', 'infinity', or 'multiverse'
+ * @param {string} difficulty - 'easy', 'medium', or 'hard'
  * @returns {Object|null} Character object or null if not found
  */
-export function getCharacterByName(characterName, gameMode, saga) {
-  const characters = getCharactersForSaga(gameMode, saga);
+export function getCharacterByName(characterName, threatLevel, gameMode, difficulty) {
+  const characters = getCharactersForThreatLevel(threatLevel, gameMode, difficulty);
   return characters.find(char => char.name === characterName) || null;
 }
 
@@ -38,13 +40,14 @@ export function getCharacterByName(characterName, gameMode, saga) {
  *
  * @param {string} playerCharacterName - Player's selected character name
  * @param {string} opponentCharacterName - Opponent's selected character name
+ * @param {string} threatLevel - 'street', 'skilled', 'tech', 'enhanced', 'god', or 'cosmic'
  * @param {string} gameMode - 'heroes', 'villains', or 'mixed'
- * @param {string} saga - 'avengers', 'infinity', or 'multiverse'
+ * @param {string} difficulty - 'easy', 'medium', or 'hard'
  * @returns {Object} Round result with winner, loser, action, and isTie
  */
-export function playRound(playerCharacterName, opponentCharacterName, gameMode, saga) {
-  const playerChar = getCharacterByName(playerCharacterName, gameMode, saga);
-  const opponentChar = getCharacterByName(opponentCharacterName, gameMode, saga);
+export function playRound(playerCharacterName, opponentCharacterName, threatLevel, gameMode, difficulty) {
+  const playerChar = getCharacterByName(playerCharacterName, threatLevel, gameMode, difficulty);
+  const opponentChar = getCharacterByName(opponentCharacterName, threatLevel, gameMode, difficulty);
 
   if (!playerChar || !opponentChar) {
     console.error('Character not found:', { playerCharacterName, opponentCharacterName });

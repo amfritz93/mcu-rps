@@ -2,16 +2,16 @@
  * CharacterSelector Component
  *
  * Fourth and final stage of game setup - choose character:
- * - Single wheel for heroes/villains only (5, 9, or 15 characters)
- * - Dual wheels for mixed mode (2x5, 2x9, or 2x15)
- * - The Watcher center button for mixed multiverse saga
+ * - Single wheel for heroes/villains only
+ * - Dual wheels for mixed mode
+ * - Neutral character center button when available
  */
 
 import { getMenuWheelConfig } from '../helpers/menu-wheel';
 import MenuWheel from './MenuWheel';
 
-function CharacterSelector({ gameMode, saga, onSelect }) {
-  const config = getMenuWheelConfig(gameMode, saga);
+function CharacterSelector({ threatLevel, gameMode, difficulty, onSelect }) {
+  const config = getMenuWheelConfig(gameMode, difficulty, threatLevel);
 
   if (!config) {
     return (

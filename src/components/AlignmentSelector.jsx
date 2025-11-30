@@ -10,7 +10,7 @@
 import { getGameModeOptions } from '../helpers/menu-wheel';
 import MenuWheel from './MenuWheel';
 
-function AlignmentSelector({ onSelect }) {
+function AlignmentSelector({ onSelect, onBack }) {
   const options = getGameModeOptions().map(mode => ({
     key: mode.key,
     name: mode.name,
@@ -18,7 +18,15 @@ function AlignmentSelector({ onSelect }) {
   }));
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[400px]">
+    <div className="flex flex-col items-center justify-center min-h-[400px] relative">
+      {onBack && (
+        <button
+          onClick={onBack}
+          className="absolute top-0 left-0 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm"
+        >
+          ← Back
+        </button>
+      )}
       <div className="mb-8 text-center">
         <p className="text-sm text-gray-600 dark:text-gray-400">
           Select your alignment

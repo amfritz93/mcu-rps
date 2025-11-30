@@ -1,43 +1,49 @@
 /**
- * Saga Helper Functions
+ * Saga Helper Functions - Threat Level System
  *
  * Helper functions to build character lists and retrieve character data
- * based on game mode and saga selections.
+ * based on threat level, game mode, and difficulty selections.
  */
 
-import { characterRegistry } from '../data/characters.js';
-import { gameData } from '../data/game.js';
+import { characterRegistry, threatLevelRosters } from '../data/characters.js';
 
 /**
- * Recursively builds the list of character names for a saga,
- * including all characters from parent sagas if 'extends' is defined
+ * Gets the character names for a specific threat level, game mode, and difficulty
  *
+ * @param {string} threatLevel - 'street', 'skilled', 'tech', 'enhanced', 'god', or 'cosmic'
  * @param {string} gameMode - 'heroes', 'villains', or 'mixed'
- * @param {string} sagaKey - 'avengers', 'infinity', or 'multiverse'
+ * @param {string} difficultyKey - 'easy', 'medium', or 'hard'
  * @returns {string[]} Array of character names
  */
-function getCharacterNamesRecursive(gameMode, sagaKey) {
-  const saga = gameData.gameModes[gameMode].sagas[sagaKey];
+function getCharacterNames(threatLevel, gameMode, difficultyKey) {
+  const roster = threatLevelRosters[threatLevel]?.[difficultyKey];
 
-  if (!saga.extends) {
-    // Base saga - return its character names
-    return [...saga.characterNames];
+  if (!roster) {
+    console.error(`Threat level "${threatLevel}" or difficulty "${difficultyKey}" not found`);
+    return [];
   }
 
-  // Recursive case - get parent saga characters and add new ones
-  const parentCharacters = getCharacterNamesRecursive(gameMode, saga.extends);
-  return [...parentCharacters, ...saga.additionalCharacters];
+  if (gameMode === 'heroes') {
+    return [...roster.heroes];
+  }
+
+  if (gameMode === 'villains') {
+    return [...roster.villains];
+  }
+
+  // Mixed mode: all characters including neutral
+  return [...roster.heroes, ...roster.villains, ...roster.neutral];
 }
 
 /**
- * Builds the full character object with cumulative beats and actions
- * based on the saga level
+ * Builds the character object for a specific threat level and difficulty
  *
  * @param {string} name - Character name
- * @param {string} sagaKey - 'avengers', 'infinity', or 'multiverse'
+ * @param {string} threatLevel - 'street', 'skilled', 'tech', 'enhanced', 'god', or 'cosmic'
+ * @param {string} difficultyKey - 'easy', 'medium', or 'hard'
  * @returns {Object} Character object with name, color, beats, and actions
  */
-function buildCharacterForSaga(name, sagaKey) {
+function buildCharacterForDifficulty(name, threatLevel, difficultyKey) {
   const char = characterRegistry[name];
 
   if (!char) {
@@ -45,42 +51,15 @@ function buildCharacterForSaga(name, sagaKey) {
     return null;
   }
 
-  // Start with base beats
-  let beats = [...char.baseBeats];
+  // Get the beats array for this threat level and difficulty
+  const beatsKey = `${threatLevel}-${difficultyKey}`;
+  const beats = char.beats[beatsKey] || [];
+
+  // Build actions object - character uses their signature action for all matchups
   const actions = {};
-
-  // Assign base action to all base beats
-  char.baseBeats.forEach(opponent => {
-    actions[opponent] = char.baseAction;
+  beats.forEach(opponent => {
+    actions[opponent] = char.action;
   });
-
-  // Add infinity saga beats/actions if applicable
-  if (sagaKey === 'infinity' || sagaKey === 'multiverse') {
-    if (char.deltasPerSaga.infinity) {
-      beats = [...beats, ...char.deltasPerSaga.infinity];
-
-      // Use infinityAction if available, otherwise use baseAction
-      const actionToUse = char.deltasPerSaga.infinityAction || char.baseAction;
-      char.deltasPerSaga.infinity.forEach(opponent => {
-        actions[opponent] = actionToUse;
-      });
-    }
-  }
-
-  // Add multiverse saga beats/actions if applicable
-  if (sagaKey === 'multiverse') {
-    if (char.deltasPerSaga.multiverse) {
-      beats = [...beats, ...char.deltasPerSaga.multiverse];
-
-      // Use multiverseAction if available, otherwise fallback to infinityAction or baseAction
-      const actionToUse = char.deltasPerSaga.multiverseAction ||
-                          char.deltasPerSaga.infinityAction ||
-                          char.baseAction;
-      char.deltasPerSaga.multiverse.forEach(opponent => {
-        actions[opponent] = actionToUse;
-      });
-    }
-  }
 
   return {
     name,
@@ -91,35 +70,46 @@ function buildCharacterForSaga(name, sagaKey) {
 }
 
 /**
- * Gets the complete list of character objects for a specific game mode and saga
+ * Gets the complete list of character objects for a threat level, game mode, and difficulty
  *
+ * @param {string} threatLevel - 'street', 'skilled', 'tech', 'enhanced', 'god', or 'cosmic'
  * @param {string} gameMode - 'heroes', 'villains', or 'mixed'
- * @param {string} sagaKey - 'avengers', 'infinity', or 'multiverse'
+ * @param {string} difficultyKey - 'easy', 'medium', or 'hard'
  * @returns {Object[]} Array of character objects with full data
  */
-export function getCharactersForSaga(gameMode, sagaKey) {
-  const characterNames = getCharacterNamesRecursive(gameMode, sagaKey);
+export function getCharactersForThreatLevel(threatLevel, gameMode, difficultyKey) {
+  const characterNames = getCharacterNames(threatLevel, gameMode, difficultyKey);
 
   return characterNames
-    .map(name => buildCharacterForSaga(name, sagaKey))
+    .map(name => buildCharacterForDifficulty(name, threatLevel, difficultyKey))
     .filter(char => char !== null); // Filter out any errors
 }
 
 /**
- * Gets saga metadata (name, difficulty, character count)
+ * Legacy function for backwards compatibility
+ * Uses 'street' as default threat level
  *
- * @param {string} gameMode - 'heroes', 'villains', or 'mixed'
- * @param {string} sagaKey - 'avengers', 'infinity', or 'multiverse'
- * @returns {Object} Saga metadata
+ * @deprecated Use getCharactersForThreatLevel instead
  */
-export function getSagaMetadata(gameMode, sagaKey) {
-  const saga = gameData.gameModes[gameMode].sagas[sagaKey];
+export function getCharactersForDifficulty(gameMode, difficultyKey) {
+  // Default to street level for backwards compatibility
+  return getCharactersForThreatLevel('street', gameMode, difficultyKey);
+}
 
-  return {
-    name: saga.name,
-    difficulty: saga.difficulty,
-    characterCount: saga.characterCount
+/**
+ * Gets difficulty metadata (name, difficulty, character count)
+ *
+ * @param {string} difficultyKey - 'easy', 'medium', or 'hard'
+ * @returns {Object} Difficulty metadata
+ */
+export function getDifficultyMetadata(difficultyKey) {
+  const difficultyMap = {
+    easy: { name: 'Easy', difficulty: 1, characterCount: 7 },
+    medium: { name: 'Medium', difficulty: 2, characterCount: 11 },
+    hard: { name: 'Hard', difficulty: 3, characterCount: 15 }
   };
+
+  return difficultyMap[difficultyKey] || null;
 }
 
 /**
@@ -129,12 +119,81 @@ export function getSagaMetadata(gameMode, sagaKey) {
  * @returns {Object} Game mode metadata
  */
 export function getGameModeMetadata(gameMode) {
-  const mode = gameData.gameModes[gameMode];
-
-  return {
-    name: mode.name,
-    description: mode.description
+  const modes = {
+    heroes: {
+      name: 'Heroes',
+      description: 'Fight for justice with the heroes'
+    },
+    villains: {
+      name: 'Villains',
+      description: 'Embrace chaos with the villains'
+    },
+    mixed: {
+      name: 'Mixed',
+      description: 'Battle across both sides'
+    }
   };
+
+  return modes[gameMode] || null;
+}
+
+/**
+ * Gets threat level metadata (name, description)
+ *
+ * @param {string} threatLevel - 'street', 'skilled', 'tech', 'enhanced', 'god', or 'cosmic'
+ * @returns {Object} Threat level metadata
+ */
+export function getThreatLevelMetadata(threatLevel) {
+  const levels = {
+    street: {
+      name: 'Street',
+      description: 'Grounded heroes and villains',
+      key: 'street'
+    },
+    skilled: {
+      name: 'Skilled',
+      description: 'Peak human combatants',
+      key: 'skilled'
+    },
+    tech: {
+      name: 'Tech',
+      description: 'Technology-based characters',
+      key: 'tech'
+    },
+    enhanced: {
+      name: 'Enhanced',
+      description: 'Super-powered beings',
+      key: 'enhanced'
+    },
+    god: {
+      name: 'God',
+      description: 'Mystical and cosmic entities',
+      key: 'god'
+    },
+    cosmic: {
+      name: 'Cosmic',
+      description: 'Universe-level threats',
+      key: 'cosmic'
+    }
+  };
+
+  return levels[threatLevel] || null;
+}
+
+/**
+ * Gets all threat level options
+ *
+ * @returns {Object[]} Array of threat level options
+ */
+export function getThreatLevelOptions() {
+  return [
+    { key: 'street', name: 'Street', description: 'Grounded heroes and villains' },
+    { key: 'skilled', name: 'Skilled', description: 'Peak human combatants' },
+    { key: 'tech', name: 'Tech', description: 'Technology-based characters' },
+    { key: 'enhanced', name: 'Enhanced', description: 'Super-powered beings' },
+    { key: 'god', name: 'God', description: 'Mystical and cosmic entities' },
+    { key: 'cosmic', name: 'Cosmic', description: 'Universe-level threats' }
+  ];
 }
 
 /**
@@ -184,3 +243,7 @@ export function determineWinner(character1, character2) {
     isTie: true
   };
 }
+
+// Legacy compatibility - export old function names as aliases
+export const getCharactersForSaga = getCharactersForDifficulty;
+export const getSagaMetadata = getDifficultyMetadata;

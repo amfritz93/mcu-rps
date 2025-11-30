@@ -6,6 +6,8 @@ import Header from './components/Header';
 import GameBoard from './components/GameBoard';
 import HelpModal from './components/HelpModal';
 import OpponentSelector from './components/OpponentSelector';
+import ThreatLevelSelector from './components/ThreatLevelSelector';
+import AlignmentSelector from './components/AlignmentSelector';
 import SagaSelector from './components/SagaSelector';
 import GamePlay from './components/GamePlay';
 import './App.css';
@@ -24,10 +26,11 @@ function App() {
   const [showHelpModal, setShowHelpModal] = useState(false);
 
   // Game setup state
-  const [gameStage, setGameStage] = useState('opponent'); // opponent, saga, playing
+  const [gameStage, setGameStage] = useState('opponent'); // opponent, threatLevel, alignment, difficulty, playing
   const [opponentType, setOpponentType] = useState(null); // 'computer' or 'player'
-  const [gameMode] = useState('mixed'); // Always 'mixed' mode
-  const [saga, setSaga] = useState(null); // 'avengers', 'infinity', or 'multiverse'
+  const [threatLevel, setThreatLevel] = useState(null); // 'street', 'skilled', 'tech', 'enhanced', 'god', 'cosmic'
+  const [gameMode, setGameMode] = useState(null); // 'heroes', 'villains', or 'mixed'
+  const [difficulty, setDifficulty] = useState(null); // 'easy', 'medium', or 'hard'
 
   // Session data
   const [currentSessionResults, setCurrentSessionResults] = useState([]);
@@ -43,11 +46,21 @@ function App() {
 
   const handleOpponentSelect = (type) => {
     setOpponentType(type);
-    setGameStage('saga');
+    setGameStage('threatLevel');
   };
 
-  const handleSagaSelect = (sagaKey) => {
-    setSaga(sagaKey);
+  const handleThreatLevelSelect = (level) => {
+    setThreatLevel(level);
+    setGameStage('alignment');
+  };
+
+  const handleAlignmentSelect = (mode) => {
+    setGameMode(mode);
+    setGameStage('difficulty');
+  };
+
+  const handleDifficultySelect = (difficultyKey) => {
+    setDifficulty(difficultyKey);
     setGameStage('playing');
   };
 
@@ -63,13 +76,34 @@ function App() {
     }]);
   };
 
+  const handleBack = () => {
+    // Navigate to previous stage without losing data
+    switch (gameStage) {
+      case 'threatLevel':
+        setGameStage('opponent');
+        break;
+      case 'alignment':
+        setGameStage('threatLevel');
+        break;
+      case 'difficulty':
+        setGameStage('alignment');
+        break;
+      case 'playing':
+        setGameStage('difficulty');
+        break;
+      default:
+        break;
+    }
+  };
+
   const handleGameEnd = () => {
     // Calculate stats and save session
     const stats = calculateSessionStats(currentSessionResults);
 
     saveSession({
+      threatLevel: threatLevel,
       alignment: gameMode,
-      saga: saga,
+      difficulty: difficulty,
       playerWins: stats.playerWins,
       opponentWins: stats.opponentWins,
       ties: stats.ties,
@@ -83,7 +117,9 @@ function App() {
     // Reset game
     setGameStage('opponent');
     setOpponentType(null);
-    setSaga(null);
+    setThreatLevel(null);
+    setGameMode(null);
+    setDifficulty(null);
     setCurrentSessionResults([]);
   };
 
@@ -91,16 +127,22 @@ function App() {
     switch (gameStage) {
       case 'opponent':
         return <OpponentSelector onSelect={handleOpponentSelect} />;
-      case 'saga':
-        return <SagaSelector gameMode={gameMode} onSelect={handleSagaSelect} />;
+      case 'threatLevel':
+        return <ThreatLevelSelector onSelect={handleThreatLevelSelect} onBack={handleBack} />;
+      case 'alignment':
+        return <AlignmentSelector onSelect={handleAlignmentSelect} onBack={handleBack} />;
+      case 'difficulty':
+        return <SagaSelector gameMode={gameMode} onSelect={handleDifficultySelect} onBack={handleBack} />;
       case 'playing':
         return (
           <GamePlay
+            threatLevel={threatLevel}
             gameMode={gameMode}
-            saga={saga}
+            difficulty={difficulty}
             opponentType={opponentType}
             onRoundComplete={handleRoundComplete}
             onGameEnd={handleGameEnd}
+            onBack={handleBack}
           />
         );
       default:

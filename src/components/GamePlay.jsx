@@ -14,11 +14,13 @@ import { getRandomCharacter, getCharacterByName } from '../utils/gameLogic';
 import { determineWinner } from '../helpers/saga.js';
 
 function GamePlay({
+  threatLevel,
   gameMode,
-  saga,
+  difficulty,
   opponentType,
   onRoundComplete,
-  onGameEnd
+  onGameEnd,
+  onBack
 }) {
   const [roundStage, setRoundStage] = useState('player-select'); // player-select, opponent-select, result
   const [playerSelection, setPlayerSelection] = useState(null);
@@ -30,11 +32,11 @@ function GamePlay({
 
     if (opponentType === 'computer') {
       // Computer makes automatic selection
-      const computerChar = getRandomCharacter(gameMode, saga);
+      const computerChar = getRandomCharacter(threatLevel, gameMode, difficulty);
       setOpponentSelection(computerChar.name);
 
       // Get player character object
-      const playerChar = getCharacterByName(characterName, gameMode, saga);
+      const playerChar = getCharacterByName(characterName, threatLevel, gameMode, difficulty);
 
       // Determine winner using the actual character objects
       const result = determineWinner(playerChar, computerChar);
@@ -56,8 +58,8 @@ function GamePlay({
     setOpponentSelection(characterName);
 
     // Get character objects
-    const playerChar = getCharacterByName(playerSelection, gameMode, saga);
-    const opponentChar = getCharacterByName(characterName, gameMode, saga);
+    const playerChar = getCharacterByName(playerSelection, threatLevel, gameMode, difficulty);
+    const opponentChar = getCharacterByName(characterName, threatLevel, gameMode, difficulty);
 
     // Determine winner
     const result = determineWinner(playerChar, opponentChar);
@@ -92,10 +94,19 @@ function GamePlay({
 
   if (roundStage === 'player-select') {
     return (
-      <div>
+      <div className="relative">
+        {onBack && (
+          <button
+            onClick={onBack}
+            className="absolute top-0 left-0 px-4 py-2 text-sm font-medium text-gray-700 dark:text-gray-300 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors shadow-sm z-10"
+          >
+            ← Back
+          </button>
+        )}
         <CharacterSelector
+          threatLevel={threatLevel}
           gameMode={gameMode}
-          saga={saga}
+          difficulty={difficulty}
           onSelect={handlePlayerSelect}
         />
       </div>
@@ -114,8 +125,9 @@ function GamePlay({
           </p>
         </div>
         <CharacterSelector
+          threatLevel={threatLevel}
           gameMode={gameMode}
-          saga={saga}
+          difficulty={difficulty}
           onSelect={handleOpponentSelect}
         />
       </div>
